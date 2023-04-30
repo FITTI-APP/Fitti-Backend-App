@@ -1,0 +1,38 @@
+spring:
+#  liquibase:
+#    change-log: db/db.changelog-main.yml
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+      jakarta:
+        persistence:
+          query:
+            timeout: 5000
+    hibernate:
+      ddl-auto:
+  servlet:
+    multipart:
+      # location: c:\\Temp\\upload
+      maxFileSize: 10MB
+      maxRequestSize: 10MB
+  datasource:
+    hikari:
+      leak-detection-threshold: 20000
+#  boot:
+#    admin:
+#      client:
+#        url: https://main.spring-boot.smartdoctor.systems
+#        instance:
+#          service-host-type: ip
+#  graphql:
+#    graphiql:
+#      enabled: true
+#    schema:
+#      file-extensions: .gql
+#      locations: classpath*:graphql/**/
+  mvc:
+    log-request-details: true
+    log-resolved-exception: true
