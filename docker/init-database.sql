@@ -1,0 +1,5 @@
+CREATE DATABASE fitty_database;
+CREATE USER 'fitty'@'localhost' IDENTIFIED BY 'fitty';
+GRANT ALL PRIVILEGES ON *.* TO 'fitty'@'%' WITH GRANT OPTION;
+# GRANT ALL PRIVILEGES ON *.* TO 'fitty'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
