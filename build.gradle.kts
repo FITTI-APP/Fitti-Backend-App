@@ -64,6 +64,11 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 
+//	implementation("org.springframework.security:spring-security-jwt:1.1.1.RELEASE")
+	implementation("com.auth0", "java-jwt", "4.3.0")
+
+
+
 	implementation("org.springframework.boot", "spring-boot-starter-actuator")
 	implementation("org.springframework.boot", "spring-boot-starter-batch")
 	implementation("org.springframework.boot", "spring-boot-starter-data-jdbc")
