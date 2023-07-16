@@ -10,7 +10,7 @@ import javax.sql.DataSource
 class JpaDataSourceConfiguration {
     @Primary
     @Bean
-    fun dataSource(): DataSource{ // todo datasource docker 설정 후 
+    fun dataSource(): DataSource { // todo datasource docker 설정 후
         val dataSourceBuilder = DataSourceBuilder.create()
         dataSourceBuilder.driverClassName("org.h2.Driver")
         dataSourceBuilder.url("jdbc:h2:mem:test")

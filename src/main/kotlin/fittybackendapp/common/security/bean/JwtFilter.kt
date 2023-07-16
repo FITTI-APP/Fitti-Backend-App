@@ -29,7 +29,7 @@ class JwtFilter(
     ): UsernamePasswordAuthenticationToken? {
         val authenticationToken = if (tokenDto != null)
             UsernamePasswordAuthenticationToken(
-                tokenDto,
+                tokenDto.userId,
                 tokenDto.name,
             )
         else null
