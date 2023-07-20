@@ -84,7 +84,7 @@ dependencies {
     implementation("org.springframework.boot", "spring-boot-starter-validation")
     implementation("org.springframework.boot", "spring-boot-starter-web")
     implementation("org.springframework.boot", "spring-boot-configuration-processor")
-    implementation("com.h2database:h2")
+    // implementation("com.h2database:h2")
 
     //	implementation("de.codecentric", "spring-boot-admin-starter-client")
     //	implementation("de.codecentric", "spring-boot-admin-starter-server")
@@ -100,7 +100,7 @@ dependencies {
     implementation("org.jetbrains.kotlin", "kotlin-reflect", "1.8.10")
     implementation("org.jetbrains.kotlin", "kotlin-stdlib", "1.8.10")
 
-    //	implementation("org.liquibase", "liquibase-core", "4.19.1")
+    implementation("org.liquibase", "liquibase-core", "4.19.1")
 
     implementation("com.querydsl", "querydsl-jpa", queryDslVersion, classifier = "jakarta")
     implementation("com.querydsl", "querydsl-kotlin", queryDslVersion)
@@ -116,6 +116,9 @@ dependencies {
     //	api("com.google.guava", "guava", "31.1-jre")
 
     // mysql 관련 의존성 추가 예정
+    implementation("mysql:mysql-connector-java:8.0.33")
+
+
     developmentOnly("org.springframework.boot", "spring-boot-devtools")
     annotationProcessor("org.springframework.boot", "spring-boot-configuration-processor")
 

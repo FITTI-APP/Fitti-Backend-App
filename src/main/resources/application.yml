@@ -1,18 +1,17 @@
 spring:
-  #  liquibase:
-  #    change-log: db/db.changelog-main.yml
-  #  jpa:
-  #    properties:
-  #      hibernate:
-  #        show_sql: true
-  #        format_sql: true
-  #        use_sql_comments: true
-  #      jakarta:
-  #        persistence:
-  #          query:
-  #            timeout: 5000
-  #    hibernate:
-  #      ddl-auto:
+  liquibase:
+    change-log: db/db.changelog-main.yml
+  jpa:
+    properties:
+      hibernate:
+        ddl-auto: true
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+        jakarta:
+          persistence:
+            query:
+              timeout: 5000
   graphql:
     graphiql:
       enabled: true
