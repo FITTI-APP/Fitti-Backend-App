@@ -11,7 +11,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
-import org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy
 import org.springframework.orm.hibernate5.SpringBeanContainer
 import org.springframework.orm.jpa.JpaTransactionManager
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean
@@ -47,7 +46,7 @@ class JpaDataSourceConfiguration(
             driverClass = DriverClass.MYSQL,
         )
 
-        return LazyConnectionDataSourceProxy(dataSource)
+        return dataSource
     }
 
     @Primary
