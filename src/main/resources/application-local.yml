@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    username: fitty
+    password: fitty
+    engine: mysql
+    host: localhost
+    port: 5515
+    dbname: fitty_database

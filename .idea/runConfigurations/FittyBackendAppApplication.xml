@@ -6,8 +6,8 @@
     <module name="fitty-backend-app_.main" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="fittybackendapp.FittyBackendAppApplication" />
     <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
-      <option name="credential" />
-      <option name="region" />
+      <option name="credential" value="profile:fitty" />
+      <option name="region" value="ap-northeast-2" />
       <option name="useCurrentConnection" value="false" />
     </extension>
     <method v="2">

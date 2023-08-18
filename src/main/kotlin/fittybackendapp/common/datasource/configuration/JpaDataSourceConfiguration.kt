@@ -1,8 +1,10 @@
-package fittybackendapp.common.datasource
+package fittybackendapp.common.datasource.configuration
 
 import fittybackendapp.common.configuration.ApplicationConfiguration
 import fittybackendapp.common.configuration.ReflectionConfiguration
 import fittybackendapp.common.constant.FittyBackendApp
+import fittybackendapp.common.datasource.DataSourceConfig
+import fittybackendapp.common.datasource.HikariDataSourceUtil
 import fittybackendapp.common.datasource.constant.DriverClass
 import org.hibernate.cfg.AvailableSettings
 import org.springframework.beans.factory.annotation.Qualifier
@@ -25,20 +27,22 @@ class JpaDataSourceConfiguration(
     private val entityBasePackage: String,
     @Qualifier(ApplicationConfiguration.BeanName.PROFILE)
     private val profile: String,
-    private val beanFactory: ConfigurableListableBeanFactory
+    private val beanFactory: ConfigurableListableBeanFactory,
+    @Qualifier(DataEntryPointConfiguration.BeanName.DATA_SOURCE_CONFIG)
+    private val dataSourceConfig: DataSourceConfig,
 ) {
     @Primary
     @Bean
     @ConfigurationProperties("spring.datasource.hikari")
     fun dataSource(): DataSource { // todo datasource docker 설정 후
-        val dataSourceConfig = DataSourceConfig(
-            username = "fitty",
-            password = "fitty",
-            engine = "mysql",
-            host = "localhost",
-            port = "5515",
-            dbname = "fitty_database",
-        )
+        // val dataSourceConfig = DataSourceConfig(
+        //     username = "fitty",
+        //     password = "fitty",
+        //     engine = "mysql",
+        //     host = "localhost",
+        //     port = "5515",
+        //     dbname = "fitty_database",
+        // )
         // secretsManagerService.getDataSourceConfig(profile) todo
         val dataSource = HikariDataSourceUtil.createHikariDataSource(
             poolName = FittyBackendApp.PROJECT,
