@@ -33,10 +33,9 @@ class User(
     @field:Size(max = 255)
     @field:NotNull
     @Column(name = "password", nullable = false)
-    var password: String
-) {
-    @NotNull
+    var password: String,
+    @field:NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "role", nullable = false)
-    var role: Role? = null
-}
+    var role: Role
+)

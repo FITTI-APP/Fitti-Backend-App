@@ -12,13 +12,14 @@ import jakarta.validation.constraints.Size
 @Entity
 @Table(name = "role")
 class Role(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    var id: Long,
 
     @field:Size(max = 255)
     @field:NotNull
     @Column(name = "name", nullable = false)
     var name: String
-)
+) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    var id: Long = 0
+}
