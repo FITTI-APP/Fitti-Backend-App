@@ -1,5 +1,9 @@
 #!/bin/bash
 
+LOCAL_PORT = 5510
+
+
+
 if [[ -z "$AWS_ACCESS_KEY_ID" ]]; then
   export AWS_DEFAULT_REGION=ap-northeast-2
   export AWS_PROFILE=fitty
