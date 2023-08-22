@@ -1,5 +1,6 @@
 package fittybackendapp.domain.auth.entity
 
+import fittybackendapp.common.entitiybase.AuditLoggingEnumBase
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -16,10 +17,10 @@ class Role(
     @field:Size(max = 255)
     @field:NotNull
     @Column(name = "name", nullable = false)
-    var name: String
-) {
+    var name: String,
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     var id: Long = 0
-}
+): AuditLoggingEnumBase()
