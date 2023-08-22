@@ -6,8 +6,6 @@ import com.auth0.jwt.exceptions.JWTVerificationException
 import com.auth0.jwt.exceptions.TokenExpiredException
 import com.auth0.jwt.interfaces.JWTVerifier
 import fittybackendapp.common.dto.TokenDto
-import fittybackendapp.common.dto.UserTokenDto
-import fittybackendapp.common.enums.Role
 import fittybackendapp.common.exception.JwtTokenExpiredException
 import fittybackendapp.common.security.configuration.AuthenticateFailedException
 import jakarta.servlet.http.HttpServletRequest
@@ -21,7 +19,6 @@ class FittyJwtVerifier(
         .require(tokenAlgorithm)
         .withClaimPresence("name")
         .withClaimPresence("userId")
-        .withClaimPresence("role")
         .build()
 
     override fun verify(request: HttpServletRequest): TokenDto? {
@@ -31,31 +28,28 @@ class FittyJwtVerifier(
         return verifyToken(bearerToken)
     }
 
-    override fun verifyToken(bearerToken: String): UserTokenDto {
+    override fun verifyToken(bearerToken: String): TokenDto {
         try {
             val verification = when (val token = bearerToken.substring(7)) {
                 // 개발
                 "almighty"
-                -> UserTokenDto(
+                -> TokenDto(
                     name = "almighty",
                     userId = 99997,
-                    role = Role.ADMIN,
                 )
 
                 // QA 토큰
                 "qalmighty"
-                -> UserTokenDto(
+                -> TokenDto(
                     name = "qalmighty",
                     userId = 99999,
-                    role = Role.USER,
                 )
 
                 else -> {
                     val verifiedJWT = tokenVerifier.verify(bearerToken)
-                    UserTokenDto(
+                    TokenDto(
                         name = verifiedJWT.getClaim("name").asString(),
                         userId = verifiedJWT.getClaim("userId").asLong(),
-                        role = Role.valueOf(verifiedJWT.getClaim("role").asString()),
                     )
                 }
             }
