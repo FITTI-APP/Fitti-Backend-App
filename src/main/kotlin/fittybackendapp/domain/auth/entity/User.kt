@@ -1,5 +1,6 @@
 package fittybackendapp.domain.auth.entity
 
+import fittybackendapp.common.entitiybase.AuditLoggingBase
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
@@ -34,8 +35,9 @@ class User(
     @field:NotNull
     @Column(name = "password", nullable = false)
     var password: String,
+    
     @field:NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "role", nullable = false)
     var role: Role
-)
+): AuditLoggingBase()
