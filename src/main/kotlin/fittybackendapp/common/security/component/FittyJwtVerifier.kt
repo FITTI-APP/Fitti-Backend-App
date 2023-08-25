@@ -31,18 +31,10 @@ class FittyJwtVerifier(
     override fun verifyToken(bearerToken: String): TokenDto {
         try {
             val verification = when (val token = bearerToken.substring(7)) {
-                // 개발
-                "almighty"
+                "fitty"
                 -> TokenDto(
                     name = "almighty",
                     userId = 99997,
-                )
-
-                // QA 토큰
-                "qalmighty"
-                -> TokenDto(
-                    name = "qalmighty",
-                    userId = 99999,
                 )
 
                 else -> {
