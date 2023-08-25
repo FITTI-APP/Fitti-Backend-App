@@ -33,7 +33,7 @@ jobs:
         shell: bash
 
       - name: Build with Gradle
-        run: ./gradlew clean bootJar
+        run: ./gradlew bootJar
         shell: bash
 
       - name: Get current time
@@ -53,7 +53,7 @@ jobs:
           cd deploy && zip -r deploy.zip .
 
       - name: Beanstalk Deploy
-        uses: einaregilsson/beanstalk-deploy@v14
+        uses: einaregilsson/beanstalk-deploy@20
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -62,4 +62,4 @@ jobs:
           version_label: Github Action-${{steps.current-time.outputs.formattedTime}} # 배포 버전은 타임스탬프를 이용하여 구분
           region: ap-northeast-2
           deployment_package: deploy/deploy.zip
-          wait_for_environment_recovery: 180
+          wait_for_environment_recovery: 300
