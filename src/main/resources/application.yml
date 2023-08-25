@@ -35,3 +35,5 @@ spring:
   mvc:
     log-request-details: true
     log-resolved-exception: true
+server:
+  port: 5000
