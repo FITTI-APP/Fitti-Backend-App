@@ -1,4 +1,4 @@
-name: earth-github-action-test CD
+name: deploy
 on:
   push:
     branches: [ develop ] # develop에 push될 때 CD가 일어나도록 핸들링
@@ -11,7 +11,6 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[skip deploy]')"
     name: deploy # deploy job 이름
     runs-on: ubuntu-latest
-
 
     env:
       CI: 1
@@ -47,11 +46,12 @@ jobs:
       - name: Generate deployment package
         run: |
           mkdir -p deploy
-          cp build/libs/*.jar deploy/application.jar 
+          find build/libs/ -name "fitty-backend-app-*.jar" ! -name "*-plain.jar" | head -n 1 | xargs -I {} cp {} deploy/application.jar
           cp Procfile deploy/Procfile
           cp -r elasticbeanstalk/.ebextensions deploy/.ebextensions
           cp -r elasticbeanstalk/.platform deploy/.platform
           cd deploy && zip -r deploy.zip .
+
         # Beanstalk Deploy 플러그인 사용
       - name: Beanstalk Deploy
         uses: einaregilsson/beanstalk-deploy@v14
