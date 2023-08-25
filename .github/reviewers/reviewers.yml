@@ -1,0 +1,12 @@
+reviewers:
+  defaults:
+    - project_leader
+    - backend_developer
+  groups:
+    backend_developer:
+      - xhdtlsid2
+    #      - dicohy27
+    #      - fortes42
+    #      - JJolggit
+    project_leader:
+      - uuccu

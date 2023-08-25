@@ -1,0 +1,20 @@
+name: Auto reviewer
+on:
+  pull_request:
+    branches-ignore:
+      - release
+      - main
+    types: [ opened, ready_for_review, reopened ]
+
+jobs:
+  set_reviewers:
+    name: Auto reviewer
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Request review
+        uses: necojackarc/auto-request-review@v0.7.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          config: .github/reviewers/reviewers.yml
