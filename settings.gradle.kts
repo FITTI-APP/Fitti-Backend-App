@@ -1,1 +1,1 @@
-rootProject.name = "fitty-backend-app "
+rootProject.name = "fitty-backend-app"
