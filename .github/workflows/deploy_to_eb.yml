@@ -47,6 +47,7 @@ jobs:
         run: |
           mkdir -p deploy
           find build/libs/ -name "fitty-backend-app-*.jar" ! -name "*-plain.jar" | head -n 1 | xargs -I {} cp {} deploy/application.jar
+          cp Procfile deploy/Procfile
           cp -r elasticbeanstalk/.ebextensions deploy/.ebextensions
           cp -r elasticbeanstalk/.platform deploy/.platform
           cd deploy && zip -r deploy.zip .
