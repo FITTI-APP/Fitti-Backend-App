@@ -52,7 +52,6 @@ jobs:
           cp -r elasticbeanstalk/.platform deploy/.platform
           cd deploy && zip -r deploy.zip .
 
-        # Beanstalk Deploy 플러그인 사용
       - name: Beanstalk Deploy
         uses: einaregilsson/beanstalk-deploy@v14
         with:
