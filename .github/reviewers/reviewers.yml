@@ -5,8 +5,8 @@ reviewers:
   groups:
     backend_developer:
       - xhdtlsid2
-      - dicohy27
-      - fortes42
-      - JJolggit
+    #      - dicohy27
+    #      - fortes42
+    #      - JJolggit
     project_leader:
       - uuccu
