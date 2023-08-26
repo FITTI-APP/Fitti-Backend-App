@@ -28,7 +28,7 @@ class AuthenticationService(
             ),
         )
         return LoginResponse(
-            token = "안녕하세요!!! 아직 완성 안되었습니다.",
+            token = "안녕하세요!2!! 아직 완성 안되었습니다.",
         )
     }
 }
