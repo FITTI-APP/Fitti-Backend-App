@@ -13,6 +13,16 @@ spring:
     port: ${DB_PORT}
     dbname: ${DB_NAME}
 
+server:
+  port: 5000 # AWS Nginx default port
+  tomcat:
+    remoteip:
+      protocol-header: x-forwarded-proto
+      remote-ip-header: x-forwarded-for
+    accesslog:
+      enabled: true
+      pattern: "%{X-Forwarded-For}i (, %h) %l %u %t &quot;%r&quot; %s %b"
+
 management:
   health:
     db:
