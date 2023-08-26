@@ -10,7 +10,7 @@ spring:
     password: ${PASSWORD}
     engine: ${ENGINE}
     host: ${HOST}
-    port: ${PORT}
+    port: ${DB_PORT}
     dbname: ${DB_NAME}
 
 management:
