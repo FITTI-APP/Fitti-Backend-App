@@ -33,8 +33,9 @@ class FittyJwtVerifier(
             val verification = when (val token = bearerToken.substring(7)) {
                 "fitty"
                 -> TokenDto(
-                    name = "almighty",
+                    name = "fitty",
                     userId = 99997,
+                    role = 2,
                 )
 
                 else -> {
@@ -42,6 +43,7 @@ class FittyJwtVerifier(
                     TokenDto(
                         name = verifiedJWT.getClaim("name").asString(),
                         userId = verifiedJWT.getClaim("userId").asLong(),
+                        role = verifiedJWT.getClaim("role").asLong(),
                     )
                 }
             }
