@@ -14,7 +14,8 @@ class TokenAlgorithmConfiguration(
     @Bean
     fun tokenAlgorithm(): Algorithm {
         // val secret = secretsManagerService.getJwtSecretKey() todo
-        val secret = "fitty_secret_key_$profile"
+        val time = System.currentTimeMillis()
+        val secret = "fitty_secret_key_$profile" + "_$time"
         return Algorithm.HMAC256(secret)
     }
 }

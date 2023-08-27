@@ -19,6 +19,7 @@ class FittyJwtVerifier(
         .require(tokenAlgorithm)
         .withClaimPresence("name")
         .withClaimPresence("userId")
+        .withClaimPresence("role")
         .build()
 
     override fun verify(request: HttpServletRequest): TokenDto? {
