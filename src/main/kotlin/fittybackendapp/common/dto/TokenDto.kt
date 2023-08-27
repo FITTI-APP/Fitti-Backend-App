@@ -2,5 +2,6 @@ package fittybackendapp.common.dto
 
 data class TokenDto(
     val name: String,
-    val userId: Long
+    val userId: Long,
+    val role: Long,
 )

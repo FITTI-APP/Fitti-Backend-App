@@ -16,28 +16,28 @@ import jakarta.validation.constraints.Size
 @Entity
 @Table(name = "user")
 class User(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    var id: Long,
-
-    @field:Size(max = 255)
-    @field:NotNull
+    @Size(max = 255)
+    @NotNull
     @Column(name = "name", nullable = false)
     var name: String,
 
-    @field:Size(max = 255)
-    @field:NotNull
+    @Size(max = 255)
+    @NotNull
     @Column(name = "email", nullable = false)
     var email: String,
 
-    @field:Size(max = 255)
-    @field:NotNull
+    @Size(max = 255)
+    @NotNull
     @Column(name = "password", nullable = false)
     var password: String,
-    
-    @field:NotNull
+
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "role", nullable = false)
     var role: Role
-): AuditLoggingBase()
+): AuditLoggingBase() {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    var id: Long? = null
+}

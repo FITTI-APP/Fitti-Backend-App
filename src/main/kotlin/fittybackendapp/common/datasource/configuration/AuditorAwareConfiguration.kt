@@ -16,7 +16,7 @@ class AuditorAwareConfiguration {
         return AuditorAware<Long> {
             val authentication = SecurityContextHolder.getContext().authentication
             // val token = authentication.principal as TokenDto todo
-            val token = TokenDto(userId = 1, name = "ROLE_USER")
+            val token = TokenDto(userId = 1, name = "ROLE_USER", role = 1L) // todo
             Optional.of(token.userId)
         }
     }

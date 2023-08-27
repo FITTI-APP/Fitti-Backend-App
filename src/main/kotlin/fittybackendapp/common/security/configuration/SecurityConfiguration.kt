@@ -2,7 +2,9 @@ package fittybackendapp.common.security.configuration
 
 import fittybackendapp.common.security.bean.JwtAccessDeniedHandler
 import fittybackendapp.common.security.bean.JwtAuthenticationEntryPoint
+import fittybackendapp.common.security.bean.JwtFilter
 import fittybackendapp.common.security.component.CustomPasswordEncoder
+import fittybackendapp.common.security.component.JwtVerifier
 import fittybackendapp.common.security.type.AuthorizeRequestsApplier
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.context.annotation.AdviceMode
@@ -27,14 +29,14 @@ class SecurityConfiguration(
     @Suppress("SpringJavaInjectionPointsAutowiringInspection")
     @Qualifier(AUTHORIZE_REQUEST_APPLIER_BEAN_NAME)
     private val authorizeRequestsApplier: AuthorizeRequestsApplier,
-    // @Suppress("SpringJavaInjectionPointsAutowiringInspection")
-    // private val jwtVerifier: JwtVerifier,
+    @Suppress("SpringJavaInjectionPointsAutowiringInspection")
+    private val jwtVerifier: JwtVerifier,
 ) {
     @Bean
     fun passwordEncoder() = CustomPasswordEncoder()
 
-    // @Bean
-    // fun jwtFilter(): JwtFilter = JwtFilter(jwtVerifier)
+    @Bean
+    fun jwtFilter(): JwtFilter = JwtFilter(jwtVerifier)
 
     @Bean
     fun authenticationEntryPoint(): AuthenticationEntryPoint = JwtAuthenticationEntryPoint()
