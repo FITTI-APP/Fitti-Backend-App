@@ -16,6 +16,6 @@ jobs:
       - name: Request review
         uses: necojackarc/auto-request-review@v0.12.0
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT_FITTY }}
           config: .github/reviewers/reviewers.yml
           use_local: true
