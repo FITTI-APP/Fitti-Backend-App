@@ -4,7 +4,7 @@ import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import fittybackendapp.common.exception.NotRegisteredEmailException
 import fittybackendapp.common.exception.UnCorrectedPasswordException
-import fittybackendapp.domain.auth.controller.response.LoginResponse
+import fittybackendapp.domain.auth.entity.User
 import fittybackendapp.domain.auth.repository.RoleRepository
 import fittybackendapp.domain.auth.repository.UserRepository
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -21,21 +21,40 @@ class AuthenticationService(
     private val roleRepository: RoleRepository,
     private val passwordEncoder: PasswordEncoder,
 ) {
-    
+    @Transactional
+    fun register(
+        email: String,
+        password: String,
+        name: String,
+    ): Long {
+        val role = roleRepository.findByName("ROLE_USER") ?: throw RuntimeException("ROLE_USER가 없습니다.")
+
+        val user = User(
+            email = email,
+            password = passwordEncoder.encode(password),
+            name = name,
+            role = role,
+        ).apply {
+            userRepository.save(this)
+        }
+
+        return user.id!!
+    }
+
     @Transactional
     fun login(
         email: String,
         password: String,
-    ): LoginResponse {
+    ): String {
         val user = userRepository.findByEmail(email) ?: throw NotRegisteredEmailException()
 
-        if (passwordEncoder.matches(password, user.password)) {
+        if (!passwordEncoder.matches(password, user.password)) {
             throw UnCorrectedPasswordException()
         }
 
-        val token = JWT.create()
+        return JWT.create()
             .withClaim("email", email)
-            .withClaim("password", password)
+            .withClaim("password", user.password)
             .withClaim("role", user.role.id)
             .withExpiresAt(
                 Date.from(
@@ -47,9 +66,5 @@ class AuthenticationService(
                 ),
             )
             .sign(tokenAlgorithm)
-
-        return LoginResponse(
-            token = token,
-        )
     }
 }
