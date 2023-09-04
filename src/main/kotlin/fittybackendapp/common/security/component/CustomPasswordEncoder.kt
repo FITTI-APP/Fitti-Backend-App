@@ -4,7 +4,7 @@ import fittybackendapp.common.util.HexUtil.toHexString
 import fittybackendapp.common.util.PasswordEncryptionUtil
 import org.springframework.security.crypto.password.PasswordEncoder
 
-class CustomPasswordEncoder : PasswordEncoder {
+class CustomPasswordEncoder: PasswordEncoder {
     override fun encode(rawPassword: CharSequence?): String {
         return PasswordEncryptionUtil.encrypt(rawPassword.toString()).toHexString()
     }

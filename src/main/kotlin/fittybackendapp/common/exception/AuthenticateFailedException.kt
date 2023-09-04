@@ -1,4 +1,4 @@
-package fittybackendapp.common.security.configuration
+package fittybackendapp.common.exception
 
 import fittybackendapp.common.exception.base.ResponseStatusReasonException
 import org.springframework.http.HttpStatus

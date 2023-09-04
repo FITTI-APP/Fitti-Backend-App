@@ -46,7 +46,9 @@ class SecurityConfiguration(
 
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
-        return http.cors {}.csrf {
+        return http.cors {
+
+        }.csrf {
             it.disable()
         }.exceptionHandling {
             it.authenticationEntryPoint(authenticationEntryPoint())

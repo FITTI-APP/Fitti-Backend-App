@@ -6,8 +6,8 @@ import com.auth0.jwt.exceptions.JWTVerificationException
 import com.auth0.jwt.exceptions.TokenExpiredException
 import com.auth0.jwt.interfaces.JWTVerifier
 import fittybackendapp.common.dto.TokenDto
+import fittybackendapp.common.exception.AuthenticateFailedException
 import fittybackendapp.common.exception.JwtTokenExpiredException
-import fittybackendapp.common.security.configuration.AuthenticateFailedException
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.stereotype.Component
 
