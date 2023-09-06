@@ -1,0 +1,4 @@
+type Query {
+    "pong"
+    ping: String!
+}

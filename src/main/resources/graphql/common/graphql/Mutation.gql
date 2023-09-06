@@ -1,0 +1,4 @@
+type Mutation {
+    "pong"
+    ping: String!
+}
