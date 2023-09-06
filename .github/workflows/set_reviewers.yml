@@ -5,7 +5,6 @@ on:
       - release
       - main
     types: [ opened, ready_for_review, reopened ]
-  push:
 
 jobs:
   set_reviewers:
