@@ -1,0 +1,4 @@
+type Subscription {
+    "pong"
+    ping: String!
+}

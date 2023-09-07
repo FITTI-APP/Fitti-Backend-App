@@ -18,6 +18,8 @@ spring:
     schema:
       file-extensions: .gql
       locations: classpath*:graphql/**/
+      printer:
+        enabled: true
   #  servlet:
   #    multipart:
   #      # location: c:\\Temp\\upload

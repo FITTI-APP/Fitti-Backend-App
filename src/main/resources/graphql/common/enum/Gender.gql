@@ -1,0 +1,5 @@
+"성별 enum입니다."
+enum Gender{
+    MALE
+    FEMALE
+}

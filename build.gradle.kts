@@ -46,7 +46,7 @@ dependencies {
     }
     val springDocVersion = "2.0.4"
     val queryDslVersion = "5.0.0"
-    //	val mapStructVersion = "1.5.3.Final"
+    val mapStructVersion = "1.5.3.Final"
 
     fun amazon(module: String, version: String? = null) =
         "software.amazon.awssdk:${module}${version?.let { ":$it" } ?: ""}"
@@ -80,6 +80,7 @@ dependencies {
     implementation("org.springframework.boot", "spring-boot-starter-data-jpa")
     //	implementation("org.springframework.boot", "spring-boot-starter-data-redis")
     implementation("org.springframework.boot", "spring-boot-starter-graphql")
+    implementation("com.graphql-java-kickstart:graphql-webclient-spring-boot-starter:2.0.0")
     implementation("org.springframework.boot", "spring-boot-starter-security")
     implementation("org.springframework.boot", "spring-boot-starter-validation")
     implementation("org.springframework.boot", "spring-boot-starter-web")
@@ -107,10 +108,10 @@ dependencies {
     kapt("com.querydsl", "querydsl-apt", queryDslVersion, classifier = "jakarta")
     implementation("jakarta.persistence", "jakarta.persistence-api")
     implementation("jakarta.annotation", "jakarta.annotation-api")
-    //	implementation("com.tailrocks.graphql", "graphql-datetime-spring-boot-starter", "6.0.0")
-    //	implementation("com.graphql-java:graphql-java-extended-scalars:20.0")
-    //	implementation("org.mapstruct", "mapstruct", mapStructVersion)
-    //	kapt("org.mapstruct", "mapstruct-processor", mapStructVersion)
+    implementation("com.tailrocks.graphql", "graphql-datetime-spring-boot-starter", "6.0.0")
+    implementation("com.graphql-java:graphql-java-extended-scalars:20.0")
+    implementation("org.mapstruct", "mapstruct", mapStructVersion)
+    kapt("org.mapstruct", "mapstruct-processor", mapStructVersion)
 
     //	implementation("com.google.guava", "guava", "31.1-jre")
     //	api("com.google.guava", "guava", "31.1-jre")
@@ -122,7 +123,7 @@ dependencies {
     developmentOnly("org.springframework.boot", "spring-boot-devtools")
     annotationProcessor("org.springframework.boot", "spring-boot-configuration-processor")
 
-    //	kaptTest("org.mapstruct", "mapstruct-processor", mapStructVersion)
+    kaptTest("org.mapstruct", "mapstruct-processor", mapStructVersion)
     testImplementation("io.kotest", "kotest-runner-junit5", "5.5.5")
     testImplementation("io.kotest", "kotest-assertions-core", "5.5.5")
     testImplementation("io.kotest", "kotest-property", "5.5.5")

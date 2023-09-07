@@ -1,0 +1,4 @@
+scalar LocalDate
+scalar LocalTime
+scalar LocalDateTime
+scalar Long

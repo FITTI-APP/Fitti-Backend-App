@@ -1,0 +1,10 @@
+"Java 기본 요일 열거형입니다."
+enum DayOfWeek {
+    MONDAY
+    TUESDAY
+    WEDNESDAY
+    THURSDAY
+    FRIDAY
+    SATURDAY
+    SUNDAY
+}
