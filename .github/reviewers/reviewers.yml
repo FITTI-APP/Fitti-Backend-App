@@ -3,6 +3,11 @@ reviewers:
     - project_leader
     - backend_developer
   groups:
+    frontend_developer:
+      - fortes42
+      - JJolggit
+      - dicohy27
+      - xhdtlsid2
     backend_developer:
       - xhdtlsid2
       - dicohy27
