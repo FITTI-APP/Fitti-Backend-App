@@ -57,7 +57,8 @@ class SecurityConfiguration(
                 it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             }.authorizeHttpRequests {
                 it.shouldFilterAllDispatcherTypes(false)
-            }.apply(authorizeRequestsApplier) // .oauth2Login() todo
+            }.apply(authorizeRequestsApplier)
+            // .oauth2Login() todo
             // .successHandler()
             // .userInfoEndpoint()
             // .userService()
