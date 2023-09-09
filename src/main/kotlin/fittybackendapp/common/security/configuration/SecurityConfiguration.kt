@@ -17,6 +17,7 @@ import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.web.AuthenticationEntryPoint
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.access.AccessDeniedHandler
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
 @Configuration
 @EnableWebSecurity
@@ -57,14 +58,15 @@ class SecurityConfiguration(
             it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         }.authorizeHttpRequests {
             it.shouldFilterAllDispatcherTypes(false)
-        }.apply(authorizeRequestsApplier) // .oauth2Login() todo
-            // .successHandler()
-            // .userInfoEndpoint()
-            // .userService()
-            // .addFilterBefore(
-            //     jwtFilter(),
-            //     UsernamePasswordAuthenticationFilter::class.java,
-            // )
+        }.apply(authorizeRequestsApplier)
+            .oauth2Login().userInfoEndpoint()
+            .successHandler()
+            .userInfoEndpoint()
+            .userService()
+            .addFilterBefore(
+                jwtFilter(),
+                UsernamePasswordAuthenticationFilter::class.java,
+            )
             .build()
     }
 
