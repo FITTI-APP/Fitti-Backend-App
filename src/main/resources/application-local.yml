@@ -4,8 +4,10 @@ spring:
       client:
         registration:
           google:
-            client-id: ${GOOGLE_CLIENT_ID}
-            client-secret: ${GOOGLE_CLIENT_PASSWORD}
+            client-id: "977472810181-9c5lhmghkq0d08mu864jdphg4236ltbm.apps.googleusercontent.com"
+            client-secret: "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"
+            scope: email, profile
+
   datasource:
     username: fitty
     password: fitty
