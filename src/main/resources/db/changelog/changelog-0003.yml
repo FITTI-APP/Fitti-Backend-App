@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: edit User Table (add for oauth2 login)
+      author: TWOCASTLENINE
+      changes:
+        - addColumn:
+            tableName: user
+            columns:
+              - column:
+                  name: nickname
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+        - addColumn:
+            tableName: user
+            columns:
+              - column:
+                  name: provider
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+        - dropColumn:
+            tableName: user
+            columnName: created_by
+        - dropColumn:
+            tableName: user
+            columnName: updated_by
+        - dropColumn:
+            tableName: user_detail
+            columnName: created_by
+        - dropColumn:
+            tableName: user_detail
+            columnName: updated_by
+
