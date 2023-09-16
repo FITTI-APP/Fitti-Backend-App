@@ -17,7 +17,6 @@ import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.web.AuthenticationEntryPoint
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.access.AccessDeniedHandler
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
 @Configuration
 @EnableWebSecurity
@@ -47,25 +46,25 @@ class SecurityConfiguration(
 
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
-        return http.cors {}
-            .csrf {
-                it.disable()
-            }.exceptionHandling {
-                it.authenticationEntryPoint(authenticationEntryPoint())
-                it.accessDeniedHandler(accessDeniedHandler())
-            }.sessionManagement {
-                it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            }.authorizeHttpRequests {
-                it.shouldFilterAllDispatcherTypes(false)
-            }.apply(authorizeRequestsApplier)
-            // .oauth2Login() todo
+        return http.cors {
+
+        }.csrf {
+            it.disable()
+        }.exceptionHandling {
+            it.authenticationEntryPoint(authenticationEntryPoint())
+            it.accessDeniedHandler(accessDeniedHandler())
+        }.sessionManagement {
+            it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        }.authorizeHttpRequests {
+            it.shouldFilterAllDispatcherTypes(false)
+        }.apply(authorizeRequestsApplier) // .oauth2Login() todo
             // .successHandler()
             // .userInfoEndpoint()
             // .userService()
-            .addFilterBefore(
-                jwtFilter(),
-                UsernamePasswordAuthenticationFilter::class.java,
-            )
+            // .addFilterBefore(
+            //     jwtFilter(),
+            //     UsernamePasswordAuthenticationFilter::class.java,
+            // )
             .build()
     }
 
