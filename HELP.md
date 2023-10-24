@@ -2,7 +2,7 @@
 
 The following was discovered as part of building this project:
 
-* The original package name '.fitty-backend-app' is invalid and this project uses 'fittybackendapp' instead.
+* The original package name '.fitti-backend-app' is invalid and this project uses 'fittybackendapp' instead.
 
 # Getting Started
 
