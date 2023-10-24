@@ -5,6 +5,7 @@ import fittibackendapp.domain.auth.controller.request.RegisterRequest
 import fittibackendapp.domain.auth.controller.response.LoginResponse
 import fittibackendapp.domain.auth.controller.response.RegisterResponse
 import fittibackendapp.domain.auth.service.AuthenticationService
+import fittibackendapp.exception.InvalidateEmailException
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import org.springframework.web.bind.annotation.PostMapping
@@ -60,6 +61,10 @@ class AuthenticationController(
         @RequestBody
         registerRequest: RegisterRequest,
     ): RegisterResponse {
+        val emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$"
+        if (!registerRequest.email.matches(emailRegex.toRegex())) {
+            throw InvalidateEmailException()
+        }
         val userId = authenticationService.register(
             email = registerRequest.email,
             password = registerRequest.password,
