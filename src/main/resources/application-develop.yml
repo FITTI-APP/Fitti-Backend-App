@@ -1,6 +1,6 @@
 spring:
   application:
-    name: Fitty API Develop
+    name: fitti API Develop
   datasource:
     hikari:
       minimum-idle: 0

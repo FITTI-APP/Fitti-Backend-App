@@ -1,1 +1,1 @@
-# Fitty-Backend-Api
+# Fitti-Backend-Api

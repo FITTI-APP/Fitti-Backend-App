@@ -35,7 +35,7 @@ jobs:
       - name: Generate deployment package
         run: |
           mkdir -p deploy
-          cp build/libs/fitty-backend-app-0.0.1.jar deploy/application.jar 
+          cp build/libs/fitti-backend-app-0.0.1.jar deploy/application.jar 
           cp Procfile deploy/Procfile
           cp -r .ebextensions deploy/.ebextensions
           cp -r .platform deploy/.platform
@@ -46,8 +46,8 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }} # github secrets로 등록한 값 사용
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }} # github secrets로 등록한 값 사용
-          application_name: fitty-api-server # EB application 이름
-          environment_name: fitty-develop-api # EB environment 이름
+          application_name: fitti-api-server # EB application 이름
+          environment_name: fitti-develop-api # EB environment 이름
           version_label: Github Action-${{steps.current-time.outputs.formattedTime}} # 배포 버전은 타임스탬프를 이용하여 구분
           region: ap-northeast-2
           deployment_package: deploy/deploy.zip

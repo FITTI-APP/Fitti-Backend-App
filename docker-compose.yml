@@ -3,27 +3,27 @@ version: "3.0"
 services:
   db:
     image: mysql:8.0
-    container_name: fitty-mysql
-    hostname: fitty-mysql
+    container_name: fitti-mysql
+    hostname: fitti-mysql
     deploy:
       placement:
         constraints:
           - node.role = manager
     environment:
       TZ: Asia/Seoul
-      MYSQL_ROOT_PASSWORD: fitty
-      MYSQL_USER: fitty
-      MYSQL_PASSWORD: fitty
-#      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: fitti
+      MYSQL_USER: fitti
+      MYSQL_PASSWORD: fitti
+    #      MYSQL_ROOT_USER: root
 
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h","localhost"]
+      test: [ "CMD", "mysqladmin", "ping", "-h","localhost" ]
     ports:
       - "5515:3306"
     restart: unless-stopped
     volumes:
-      - fitty-mysql_volume:/var/lib/mysql
+      - fitti-mysql_volume:/var/lib/mysql
       - ./docker/init-database.sql:/docker-entrypoint-initdb.d/init-database.sql
 
 volumes:
-  fitty-mysql_volume:
+  fitti-mysql_volume:

@@ -1,8 +1,8 @@
 spring:
   datasource:
-    username: fitty
-    password: fitty
+    username: fitti
+    password: fitti
     engine: mysql
     host: localhost
     port: 5515
-    dbname: fitty_database
+    dbname: fitti_database
