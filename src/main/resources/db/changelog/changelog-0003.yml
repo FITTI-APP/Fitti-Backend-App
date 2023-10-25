@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: add column type & drop exercise_save_type table
+      author: TWOCASTLENINE
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: type
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+            tableName: exercise_kind
+
+
+
+
+
