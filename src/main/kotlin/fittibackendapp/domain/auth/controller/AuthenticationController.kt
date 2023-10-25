@@ -6,6 +6,7 @@ import fittibackendapp.domain.auth.controller.response.LoginResponse
 import fittibackendapp.domain.auth.controller.response.RegisterResponse
 import fittibackendapp.domain.auth.service.AuthenticationService
 import fittibackendapp.exception.InvalidateEmailException
+import fittibackendapp.exception.InvalidatePasswordException
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import org.springframework.web.bind.annotation.PostMapping
@@ -48,7 +49,7 @@ class AuthenticationController(
         description = """회원가입을 합니다.
             |이메일과 비밀번호 그리고 이름을 입력하여 회원가입을 합니다.
             |이메일은 중복될 수 없습니다.
-            |비밀번호는 8자리 이상이어야 하며 영문, 숫자, 특수문자중 2가지 이상 포함되어야 합니다.
+            |비밀번호는 8자리 이상 20자리 이하 이어야 하며 영문, 숫자, 특수문자가 모두 포함되어야 합니다.
             |todo 아직 위의 validation은 구현되어 있지 않습니다.
         """,
         responses = [
@@ -61,9 +62,13 @@ class AuthenticationController(
         @RequestBody
         registerRequest: RegisterRequest,
     ): RegisterResponse {
-        val emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$"
+        val emailRegex = "^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$"
+        val passwordRegex = "^(?=.*[a-zA-Z])(?=.*\\d)(?=.*\\W).{8,20}$"
         if (!registerRequest.email.matches(emailRegex.toRegex())) {
             throw InvalidateEmailException()
+        }
+        if (!registerRequest.password.matches(passwordRegex.toRegex())) {
+            throw InvalidatePasswordException()
         }
         val userId = authenticationService.register(
             email = registerRequest.email,
