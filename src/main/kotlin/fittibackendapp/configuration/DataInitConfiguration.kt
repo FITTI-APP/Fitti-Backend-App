@@ -18,10 +18,10 @@ class DataInitConfiguration(
     @TransactionalEventListener(ApplicationStartingEvent::class)
     @EventListener(ApplicationStartingEvent::class)
     fun initEnumData() {
-        if (roleRepository.findByName("ROLE_USER") == null)
-            roleRepository.save(Role(name = "ROLE_USER"))
+        if (roleRepository.findByName(Role.ROLE_USER) == null)
+            roleRepository.save(Role(name = Role.ROLE_USER))
 
-        if (roleRepository.findByName("ROLE_ADMIN") == null)
-            roleRepository.save(Role(name = "ROLE_ADMIN"))
+        if (roleRepository.findByName(Role.ROLE_ADMIN) == null)
+            roleRepository.save(Role(name = Role.ROLE_ADMIN))
     }
 }

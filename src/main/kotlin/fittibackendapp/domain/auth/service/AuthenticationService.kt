@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import fittibackendapp.common.exception.NotRegisteredEmailException
 import fittibackendapp.common.exception.UnCorrectedPasswordException
+import fittibackendapp.domain.auth.entity.Role
 import fittibackendapp.domain.auth.entity.User
 import fittibackendapp.domain.auth.repository.RoleRepository
 import fittibackendapp.domain.auth.repository.UserRepository
@@ -28,7 +29,7 @@ class AuthenticationService(
         password: String,
         name: String,
     ): Long {
-        val role = roleRepository.findByName("ROLE_USER") ?: throw RuntimeException("ROLE_USER가 없습니다.")
+        val role = roleRepository.findByName(Role.ROLE_USER) ?: throw RuntimeException("ROLE_USER가 없습니다.")
         val existUser = userRepository.findByEmail(email)
         if (existUser != null) {
             throw DuplicatedEmailException()
