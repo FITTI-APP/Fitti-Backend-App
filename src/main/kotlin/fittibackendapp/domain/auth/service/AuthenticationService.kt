@@ -4,9 +4,11 @@ import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import fittibackendapp.common.exception.NotRegisteredEmailException
 import fittibackendapp.common.exception.UnCorrectedPasswordException
+import fittibackendapp.domain.auth.entity.Role
 import fittibackendapp.domain.auth.entity.User
 import fittibackendapp.domain.auth.repository.RoleRepository
 import fittibackendapp.domain.auth.repository.UserRepository
+import fittibackendapp.exception.DuplicatedEmailException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -27,8 +29,11 @@ class AuthenticationService(
         password: String,
         name: String,
     ): Long {
-        val role = roleRepository.findByName("ROLE_USER") ?: throw RuntimeException("ROLE_USER가 없습니다.")
-
+        val role = roleRepository.findByName(Role.ROLE_USER) ?: throw RuntimeException("ROLE_USER가 없습니다.")
+        val existUser = userRepository.findByEmail(email)
+        if (existUser != null) {
+            throw DuplicatedEmailException()
+        }
         val user = User(
             email = email,
             password = passwordEncoder.encode(password),

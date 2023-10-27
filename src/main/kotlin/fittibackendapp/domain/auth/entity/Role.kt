@@ -23,4 +23,9 @@ class Role(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     var id: Long = 0
-): AuditLoggingEnumBase()
+): AuditLoggingEnumBase(){
+    companion object {
+        const val ROLE_USER = "ROLE_USER"
+        const val ROLE_ADMIN = "ROLE_ADMIN"
+    }
+}
