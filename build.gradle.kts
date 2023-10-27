@@ -71,9 +71,6 @@ dependencies {
     implementation("com.auth0", "java-jwt", "4.3.0")
     implementation("org.reflections", "reflections", "0.10.2")
 
-
-
-
     implementation("org.springframework.boot", "spring-boot-starter-actuator")
     implementation("org.springframework.boot", "spring-boot-starter-batch")
     implementation("org.springframework.boot", "spring-boot-starter-data-jdbc")
@@ -110,8 +107,9 @@ dependencies {
     implementation("jakarta.annotation", "jakarta.annotation-api")
     implementation("com.tailrocks.graphql", "graphql-datetime-spring-boot-starter", "6.0.0")
     implementation("com.graphql-java:graphql-java-extended-scalars:20.0")
-    implementation("org.mapstruct", "mapstruct", mapStructVersion)
-    kapt("org.mapstruct", "mapstruct-processor", mapStructVersion)
+    // implementation("org.mapstruct", "mapstruct", mapStructVersion)
+    // kapt("org.mapstruct", "mapstruct-processor", mapStructVersion)
+    implementation("org.modelmapper", "modelmapper", "3.0.0")
 
     //	implementation("com.google.guava", "guava", "31.1-jre")
     //	api("com.google.guava", "guava", "31.1-jre")
