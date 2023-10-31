@@ -1,0 +1,6 @@
+type Exercise {
+    name: String!,
+    kind: ExerciseKind!,
+    saveType: ExerciseSaveType!,
+    id: ID!
+}

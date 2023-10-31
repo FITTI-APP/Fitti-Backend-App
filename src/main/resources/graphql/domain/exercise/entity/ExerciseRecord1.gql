@@ -1,0 +1,7 @@
+type ExerciseRecord1 {
+    user: User!,
+    startTime: LocalDateTime!,
+    endTime: LocalDateTime!,
+    memo: String!,
+    id: ID!
+}
