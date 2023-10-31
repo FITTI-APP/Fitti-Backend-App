@@ -46,7 +46,7 @@ dependencies {
     }
     val springDocVersion = "2.0.4"
     val queryDslVersion = "5.0.0"
-    val mapStructVersion = "1.5.3.Final"
+    val mapStructVersion = "1.5.5.Final"
 
     fun amazon(module: String, version: String? = null) =
         "software.amazon.awssdk:${module}${version?.let { ":$it" } ?: ""}"
@@ -70,9 +70,6 @@ dependencies {
     //	implementation("org.springframework.security:spring-security-jwt:1.1.1.RELEASE")
     implementation("com.auth0", "java-jwt", "4.3.0")
     implementation("org.reflections", "reflections", "0.10.2")
-
-
-
 
     implementation("org.springframework.boot", "spring-boot-starter-actuator")
     implementation("org.springframework.boot", "spring-boot-starter-batch")
@@ -110,8 +107,10 @@ dependencies {
     implementation("jakarta.annotation", "jakarta.annotation-api")
     implementation("com.tailrocks.graphql", "graphql-datetime-spring-boot-starter", "6.0.0")
     implementation("com.graphql-java:graphql-java-extended-scalars:20.0")
+    // implementation("com.graphql-java-generator:graphql-java-common-runtime:1.18.6") todo
     implementation("org.mapstruct", "mapstruct", mapStructVersion)
     kapt("org.mapstruct", "mapstruct-processor", mapStructVersion)
+    // implementation("org.modelmapper", "modelmapper", "3.0.0")
 
     //	implementation("com.google.guava", "guava", "31.1-jre")
     //	api("com.google.guava", "guava", "31.1-jre")

@@ -3,6 +3,8 @@ package fittibackendapp.domain.diet.entity
 import fittibackendapp.common.entitiybase.AuditLoggingBase
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
 import jakarta.validation.constraints.NotNull
@@ -24,6 +26,7 @@ class DietRecord(
     var memo: String
 ): AuditLoggingBase() {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     var id: Long? = null
 }

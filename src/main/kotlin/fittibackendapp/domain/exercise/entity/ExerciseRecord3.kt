@@ -4,6 +4,8 @@ import fittibackendapp.common.entitiybase.AuditLoggingBase
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
@@ -12,7 +14,7 @@ import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
 import org.hibernate.annotations.OnDelete
 import org.hibernate.annotations.OnDeleteAction
-import java.time.LocalTime
+import java.time.Duration
 
 @Entity
 @Table(name = "exercise_record_3")
@@ -30,7 +32,7 @@ class ExerciseRecord3(
     @Column(name = "reps")
     var reps: Int,
     @Column(name = "total_time")
-    var totalTime: LocalTime,
+    var totalTime: Duration,
     @Size(max = 255)
     @NotNull
     @Column(name = "memo", nullable = false)
@@ -39,6 +41,7 @@ class ExerciseRecord3(
     var distance: Double
 ): AuditLoggingBase() {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     var id: Long? = null
 }

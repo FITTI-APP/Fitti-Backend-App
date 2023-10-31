@@ -1,0 +1,7 @@
+type ExerciseRecord2{
+    exerciseRecord1: ExerciseRecord1!,
+    exercise: Exercise!,
+    order: Int!,
+    memo: String!,
+    id: ID!
+}

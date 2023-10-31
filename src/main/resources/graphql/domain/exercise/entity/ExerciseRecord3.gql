@@ -1,0 +1,10 @@
+type ExerciseRecord3{
+    exerciseRecord2: ExerciseRecord2!,
+    order: Int!,
+    weight: Float!,
+    reps: Int!,
+    totalTime: LocalTime!,
+    memo: String!,
+    distance: Float!,
+    id: ID!
+}
