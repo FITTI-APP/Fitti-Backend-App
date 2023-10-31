@@ -50,7 +50,6 @@ class AuthenticationController(
             |이메일과 비밀번호 그리고 이름을 입력하여 회원가입을 합니다.
             |이메일은 중복될 수 없습니다.
             |비밀번호는 8자리 이상 20자리 이하 이어야 하며 영문, 숫자, 특수문자가 모두 포함되어야 합니다.
-            |todo 아직 위의 validation은 구현되어 있지 않습니다.
         """,
         responses = [
             ApiResponse(responseCode = "200", description = "OK"),
