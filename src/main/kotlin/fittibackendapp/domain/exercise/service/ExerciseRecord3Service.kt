@@ -4,11 +4,10 @@ import fittibackendapp.domain.exercise.entity.ExerciseRecord3
 import fittibackendapp.domain.exercise.repository.ExerciseRecord2Repository
 import fittibackendapp.domain.exercise.repository.ExerciseRecord3Repository
 import fittibackendapp.dto.ExerciseRecord3Dto
+import fittibackendapp.dto.mapstruct.ExerciseRecord3MapStruct
 import fittibackendapp.exception.NotFoundExerciseRecord2Exception
 import fittibackendapp.exception.NotFoundExerciseRecord3Exception
 import jakarta.transaction.Transactional
-import org.modelmapper.ModelMapper
-import org.modelmapper.TypeToken
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.time.Duration
@@ -17,7 +16,7 @@ import java.time.Duration
 class ExerciseRecord3Service(
     private val exerciseRecord3Repository: ExerciseRecord3Repository,
     private val exerciseRecord2Repository: ExerciseRecord2Repository,
-    private val modelMapper: ModelMapper
+    private val exerciseRecord3MapStruct: ExerciseRecord3MapStruct,
 ) {
     @Transactional
     fun create(
@@ -44,7 +43,7 @@ class ExerciseRecord3Service(
             exerciseRecord3Repository.save(this)
         }
 
-        return modelMapper.map(exerciseRecord3, ExerciseRecord3Dto::class.java)
+        return exerciseRecord3MapStruct.toDto(exerciseRecord3)
     }
 
     @Transactional
@@ -76,17 +75,14 @@ class ExerciseRecord3Service(
             exerciseRecord3Repository.save(this)
         }
 
-        return modelMapper.map(updatedExerciseRecord3, ExerciseRecord3Dto::class.java)
+        return exerciseRecord3MapStruct.toDto(updatedExerciseRecord3)
     }
 
     fun listExerciseRecord3sByExerciseRecord2Id(
         exerciseRecord2Id: Long?
     ): List<ExerciseRecord3Dto> {
         val exerciseRecord3s = exerciseRecord3Repository.findAllByExerciseRecord2Id(exerciseRecord2Id)
-
-        val returnType = object: TypeToken<List<ExerciseRecord3Dto>>() {}.type
-
-        return modelMapper.map(exerciseRecord3s, returnType)
+        return exerciseRecord3MapStruct.toDtos(exerciseRecord3s)
     }
 
     @Transactional

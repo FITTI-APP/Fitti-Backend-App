@@ -5,12 +5,11 @@ import fittibackendapp.domain.exercise.repository.ExerciseRecord1Repository
 import fittibackendapp.domain.exercise.repository.ExerciseRecord2Repository
 import fittibackendapp.domain.exercise.repository.ExerciseRepository
 import fittibackendapp.dto.ExerciseRecord2Dto
+import fittibackendapp.dto.mapstruct.ExerciseRecord2MapStruct
 import fittibackendapp.exception.NotFoundExerciseException
 import fittibackendapp.exception.NotFoundExerciseRecord1Exception
 import fittibackendapp.exception.NotFoundExerciseRecord2Exception
 import jakarta.transaction.Transactional
-import org.modelmapper.ModelMapper
-import org.modelmapper.TypeToken
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 
@@ -19,7 +18,7 @@ class ExerciseRecord2Service(
     private val exerciseRecord2Repository: ExerciseRecord2Repository,
     private val exerciseRepository: ExerciseRepository,
     private val exerciseRecord1Repository: ExerciseRecord1Repository,
-    private val modelMapper: ModelMapper
+    private val exerciseRecord2MapStruct: ExerciseRecord2MapStruct
 ) {
 
     @Transactional
@@ -44,7 +43,7 @@ class ExerciseRecord2Service(
             exerciseRecord2Repository.save(this)
         }
 
-        return modelMapper.map(exerciseRecord2, ExerciseRecord2Dto::class.java)
+        return exerciseRecord2MapStruct.toDto(exerciseRecord2)
     }
 
     @Transactional
@@ -73,16 +72,14 @@ class ExerciseRecord2Service(
             exerciseRecord2Repository.save(this)
         }
 
-        return modelMapper.map(updatedExerciseRecord2, ExerciseRecord2Dto::class.java)
+        return exerciseRecord2MapStruct.toDto(updatedExerciseRecord2)
     }
 
     fun listExerciseRecord2sByExerciseRecord1Id(
         exerciseRecord1Id: Long?
     ): List<ExerciseRecord2Dto> {
         val exerciseRecord2s = exerciseRecord2Repository.findAllByExerciseRecord1Id(exerciseRecord1Id)
-        val returnType = object: TypeToken<List<ExerciseRecord2Dto>>() {}.type
-
-        return modelMapper.map(exerciseRecord2s, returnType)
+        return exerciseRecord2MapStruct.toDtos(exerciseRecord2s)
     }
 
     @Transactional

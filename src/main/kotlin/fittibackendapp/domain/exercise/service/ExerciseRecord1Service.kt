@@ -4,10 +4,10 @@ import fittibackendapp.domain.auth.repository.UserRepository
 import fittibackendapp.domain.exercise.entity.ExerciseRecord1
 import fittibackendapp.domain.exercise.repository.ExerciseRecord1Repository
 import fittibackendapp.dto.ExerciseRecord1Dto
+import fittibackendapp.dto.mapstruct.ExerciseRecord1MapStruct
 import fittibackendapp.exception.NotFoundExerciseRecord1Exception
 import fittibackendapp.exception.NotFoundUserException
 import jakarta.transaction.Transactional
-import org.modelmapper.ModelMapper
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
@@ -16,7 +16,7 @@ import java.time.LocalDateTime
 class ExerciseRecord1Service(
     private val exerciseRecord1Repository: ExerciseRecord1Repository,
     private val userRepository: UserRepository,
-    private val modelMapper: ModelMapper
+    private val exerciseRecord1MapStruct: ExerciseRecord1MapStruct,
 ) {
 
     @Transactional
@@ -37,7 +37,7 @@ class ExerciseRecord1Service(
             exerciseRecord1Repository.save(this)
         }
 
-        return modelMapper.map(exerciseRecord1, ExerciseRecord1Dto::class.java)
+        return exerciseRecord1MapStruct.toDto(exerciseRecord1)
     }
 
     @Transactional
@@ -62,7 +62,7 @@ class ExerciseRecord1Service(
             exerciseRecord1Repository.save(this)
         }
 
-        return modelMapper.map(updatedExerciseRecord1, ExerciseRecord1Dto::class.java)
+        return exerciseRecord1MapStruct.toDto(updatedExerciseRecord1)
     }
 }
 
