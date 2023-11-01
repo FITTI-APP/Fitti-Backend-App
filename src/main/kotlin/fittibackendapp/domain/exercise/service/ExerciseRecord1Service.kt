@@ -10,6 +10,7 @@ import fittibackendapp.exception.NotFoundUserException
 import jakarta.transaction.Transactional
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 @Service
@@ -18,6 +19,35 @@ class ExerciseRecord1Service(
     private val userRepository: UserRepository,
     private val exerciseRecord1MapStruct: ExerciseRecord1MapStruct,
 ) {
+
+    fun listByDate(
+        userId: Long,
+        date: LocalDate,
+    ): List<ExerciseRecord1Dto> {
+        val user = userRepository.findByIdOrNull(userId) ?: throw NotFoundUserException()
+
+        val exerciseRecord1s = exerciseRecord1Repository.findAllByUserAndStartTimeBetween(
+            user = user,
+            startTime = date.atStartOfDay(),
+            endTime = date.atTime(LocalDateTime.MAX.toLocalTime()),
+        ) // todo QueryDsl
+
+        return exerciseRecord1MapStruct.toDtos(exerciseRecord1s)
+    }
+
+    fun findById(
+        id: Long,
+        userId: Long,
+    ): ExerciseRecord1Dto {
+        val user = userRepository.findByIdOrNull(userId) ?: throw NotFoundUserException()
+
+        val exerciseRecord1 = exerciseRecord1Repository.findByUserAndId(
+            user = user,
+            id = id,
+        ) ?: throw NotFoundExerciseRecord1Exception()
+
+        return exerciseRecord1MapStruct.toDto(exerciseRecord1)
+    }
 
     @Transactional
     fun create(
