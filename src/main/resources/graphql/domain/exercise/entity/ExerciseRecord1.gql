@@ -5,3 +5,7 @@ type ExerciseRecord1 {
     memo: String!,
     id: ID!
 }
+
+extend type ExerciseRecord1  {
+    exerciseRecord2s: [ExerciseRecord2!]!
+}
