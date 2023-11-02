@@ -16,4 +16,9 @@ class DietService(
         val diet = dietRepository.findByIdOrNull(id) ?: throw NotFoundDietException()
         return dietMapStruct.toDto(diet)
     }
+
+    fun findAllById(ids: List<Long>): List<DietDto> {
+        val diets = dietRepository.findAllById(ids)
+        return dietMapStruct.toDtos(diets)
+    }
 }
