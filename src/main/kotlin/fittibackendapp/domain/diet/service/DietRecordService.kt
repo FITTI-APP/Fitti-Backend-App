@@ -17,8 +17,8 @@ class DietRecordService (
     private val dietRecordRepository: DietRecordRepository,
     private val dietRecordMapStruct: DietRecordMapStruct
 ){
-    fun findDietRecordsBetweenTwoDays(userId: Long, fromDate: LocalDate, toDate: LocalDate): List<DietRecordDto> {
-        val dietRecords = dietRecordRepository.findDietRecordsBetweenTwoDays(userId, fromDate, toDate)
+    fun findDietRecordsBetweenDays(userId: Long, fromDate: LocalDate, toDate: LocalDate): List<DietRecordDto> {
+        val dietRecords = dietRecordRepository.findDietRecordsBetweenDays(userId, fromDate, toDate)
         return dietRecordMapStruct.toDtos(dietRecords)
     }
 }

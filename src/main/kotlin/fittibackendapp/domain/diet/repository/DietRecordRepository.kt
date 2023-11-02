@@ -8,7 +8,7 @@ import java.time.LocalDate
 
 interface DietRecordRepository : JpaRepository<DietRecord, Long>{
     @Query("SELECT e FROM DietRecord e WHERE e.userId = :userId AND e.dateTime BETWEEN :fromDate AND :toDate")
-    fun findDietRecordsBetweenTwoDays(
+    fun findDietRecordsBetweenDays(
         @Param("userId") userId: Long,
         @Param("fromDate") fromDate: LocalDate,
         @Param("toDate") toDate: LocalDate

@@ -14,7 +14,7 @@ class DietRecordQueryFacade (
     private val dietDietRecordService: DietDietRecordService
 ){
     fun getPcfAmountInGramsBetweenDays(userId: Long, fromDate: LocalDate, toDate: LocalDate) : PcfAmountInGramsDto {
-        val dietRecords = dietRecordService.findDietRecordsBetweenTwoDays(userId, fromDate, toDate)
+        val dietRecords = dietRecordService.findDietRecordsBetweenDays(userId, fromDate, toDate)
         var protein = 0.0
         var carbohydrate = 0.0
         var fat = 0.0
