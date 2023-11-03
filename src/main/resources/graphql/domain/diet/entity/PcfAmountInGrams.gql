@@ -1,5 +1,5 @@
 type PctAmountInGrams{
-    protein: Double!,
-    carbohydrate: Double!,
-    fat: Double!
+    protein: Float!,
+    carbohydrate: Float!,
+    fat: Float!
 }
