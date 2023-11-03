@@ -15,7 +15,7 @@ class DietDietRecordService(
         return dietDietRecordMapStruct.toDtos(dietDietRecords)
     }
 
-    fun findAllByDietRecordIdIn(dietRecordIds: List<Long>): List<DietDietRecordDto> {
+    fun findAllByDietRecordIds(dietRecordIds: List<Long>): List<DietDietRecordDto> {
         val dietDietRecords = dietDietRecordRepository.findAllByDietRecordIdIn(dietRecordIds)
         return dietDietRecordMapStruct.toDtos(dietDietRecords)
     }

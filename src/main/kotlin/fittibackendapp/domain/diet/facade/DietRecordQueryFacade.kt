@@ -15,8 +15,8 @@ class DietRecordQueryFacade (
 ){
     fun getPcfAmountInGramsBetweenDays(userId: Long, fromDate: LocalDate, toDate: LocalDate) : PcfAmountInGramsDto {
         val dietRecordIds = dietRecordService.findDietRecordsBetweenDays(userId, fromDate, toDate).map { it.id }
-        val dietDietRecords = dietDietRecordService.findAllByDietRecordIdIn(dietRecordIds)
-        val diets = dietService.findAllById(dietDietRecords.map { it.diet.id }.distinct())
+        val dietDietRecords = dietDietRecordService.findAllByDietRecordIds(dietRecordIds)
+        val diets = dietService.findAllByIds(dietDietRecords.map { it.diet.id }.distinct())
         val dietMap = diets.associateBy { it.id }
         var protein = 0.0
         var carbohydrate = 0.0
