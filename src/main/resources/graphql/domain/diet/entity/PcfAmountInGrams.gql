@@ -1,4 +1,4 @@
-type PctAmountInGrams{
+type PcfAmountInGrams{
     protein: Float!,
     carbohydrate: Float!,
     fat: Float!

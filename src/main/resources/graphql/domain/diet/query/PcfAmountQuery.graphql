@@ -1,0 +1,3 @@
+extend type Query{
+    getPcfAmountInGramsBetweenDays(userId: Long!, fromDate: LocalDate!, toDate: LocalDate!): PcfAmountInGrams!
+}
