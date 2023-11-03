@@ -1,4 +1,3 @@
 extend type Mutation {
-
     putExerciseRecord1(exerciseRecord1Input: ExerciseRecord1Input!): ExerciseRecord1
 }
