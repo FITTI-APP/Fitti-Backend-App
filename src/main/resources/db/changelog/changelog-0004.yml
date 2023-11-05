@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: remove save_type column on exercise & add save_type column on exercise_record_1
+      author: dicohy27
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: save_type
+                  type: bigint
+                  constraints:
+                    nullable: false
+            tableName: exercise_record_1
+        - addForeignKeyConstraint:
+            baseTableName: exercise_record_1
+            baseColumnNames: save_type
+            constraintName: fk_exercise_record_1_save_type_id
+            referencedTableName: exercise_save_type
+            referencedColumnNames: id
+            onDelete: CASCADE
+            onUpdate: CASCADE
+        - dropForeignKeyConstraint:
+            constraintName: fk_exercise_save_type_id
+            baseTableName: exercise
+        - dropColumn:
+            columnName: save_type
+            tableName: exercise
