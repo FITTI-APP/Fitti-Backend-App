@@ -85,6 +85,13 @@ class ExerciseRecord3Service(
         return exerciseRecord3MapStruct.toDtos(exerciseRecord3s)
     }
 
+    fun listByExerciseRecord2Ids(
+        exerciseRecord2Ids: List<Long>
+    ): List<ExerciseRecord3Dto> {
+        val exerciseRecord3s = exerciseRecord3Repository.findAllByExerciseRecord2IdIn(exerciseRecord2Ids)
+        return exerciseRecord3MapStruct.toDtos(exerciseRecord3s)
+    }
+
     @Transactional
     fun deleteAll(
         ids: List<Long>

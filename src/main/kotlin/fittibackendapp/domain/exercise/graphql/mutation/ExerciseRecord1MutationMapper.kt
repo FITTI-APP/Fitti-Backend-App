@@ -8,7 +8,7 @@ import org.springframework.graphql.data.method.annotation.MutationMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class ExerciseRecordMutationMapper(
+class ExerciseRecord1MutationMapper(
     private val exerciseRecordMutationFacade: ExerciseRecordMutationFacade,
 ) {
     @MutationMapping
