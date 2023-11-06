@@ -11,5 +11,6 @@ data class ExerciseRecord1Dto(
     val startTime: LocalDateTime,
     val endTime: LocalDateTime,
     val memo: String,
+    val saveType: ExerciseSaveTypeDto,
     val id: Long
 ): Serializable

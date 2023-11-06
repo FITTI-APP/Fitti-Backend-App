@@ -4,4 +4,5 @@ type ExerciseRecord1 {
     endTime: LocalDateTime!,
     memo: String!,
     id: ID!
+    saveType: ExerciseSaveType!
 }
