@@ -34,7 +34,12 @@ class ExerciseRecord1(
     @Size(max = 255)
     @NotNull
     @Column(name = "memo", nullable = false)
-    var memo: String
+    var memo: String,
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "save_type", nullable = false)
+    var saveType: ExerciseSaveType,
 ): AuditLoggingBase() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

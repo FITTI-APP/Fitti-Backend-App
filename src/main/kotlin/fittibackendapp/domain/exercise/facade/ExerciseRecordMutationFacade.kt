@@ -30,6 +30,7 @@ class ExerciseRecordMutationFacade(
                 memo = exerciseRecord1Input.memo,
                 startTime = exerciseRecord1Input.startTime,
                 endTime = exerciseRecord1Input.endTime,
+                saveTypeId = exerciseRecord1Input.saveTypeId,
             )
         }
         else {
@@ -39,6 +40,7 @@ class ExerciseRecordMutationFacade(
                 memo = exerciseRecord1Input.memo,
                 startTime = exerciseRecord1Input.startTime,
                 endTime = exerciseRecord1Input.endTime,
+                saveTypeId = exerciseRecord1Input.saveTypeId,
             )
         }.run {
             createOrUpdateExerciseRecord2s(

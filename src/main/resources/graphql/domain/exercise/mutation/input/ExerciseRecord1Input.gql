@@ -3,5 +3,6 @@ input ExerciseRecord1Input{
     memo: String!,
     startTime: LocalDateTime!,
     endTime: LocalDateTime!,
+    saveTypeId: Long!,
     exerciseRecord2Inputs: [ExerciseRecord2Input!]!
 }
