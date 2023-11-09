@@ -9,7 +9,7 @@ import jakarta.persistence.Id
 import jakarta.persistence.Table
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
-import java.time.Instant
+import java.time.LocalDateTime
 
 @Entity
 @Table(name = "diet_record")
@@ -19,7 +19,7 @@ class DietRecord(
     var userId: Long,
     @NotNull
     @Column(name = "date_time", nullable = false)
-    var dateTime: Instant,
+    var dateTime: LocalDateTime,
     @Size(max = 255)
     @NotNull
     @Column(name = "memo", nullable = false)
