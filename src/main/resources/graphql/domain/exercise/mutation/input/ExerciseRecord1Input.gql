@@ -1,8 +1,0 @@
-input ExerciseRecord1Input{
-    exerciseRecord1Id: Long,
-    memo: String!,
-    startTime: LocalDateTime!,
-    endTime: LocalDateTime!,
-    saveTypeId: Long!,
-    exerciseRecord2Inputs: [ExerciseRecord2Input!]!
-}

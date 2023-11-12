@@ -1,0 +1,8 @@
+input ExerciseSessionRecordInput{
+    exerciseSessionRecordId: Long,
+    memo: String!,
+    startTime: LocalDateTime!,
+    endTime: LocalDateTime!,
+    saveTypeId: Long!,
+    exerciseExerciseRecordInputs: [ExerciseExerciseRecordInput!]!
+}

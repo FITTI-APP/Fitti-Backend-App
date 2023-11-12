@@ -1,9 +1,0 @@
-input ExerciseRecord3Input{
-    exerciseRecord3Id: Long,
-    memo: String!,
-    order: Int!,
-    weight: Float!,
-    reps: Int!,
-    distance: Float!,
-    totalTime: Duration!
-}

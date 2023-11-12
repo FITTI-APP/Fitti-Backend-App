@@ -1,0 +1,10 @@
+type ExerciseSetRecord{
+    exerciseExerciseRecord: ExerciseExerciseRecord!,
+    order: Int!,
+    weight: Float!,
+    reps: Int!,
+    totalTime: LocalTime!,
+    memo: String!,
+    distance: Float!,
+    id: ID!
+}

@@ -1,0 +1,12 @@
+type ExerciseSessionRecord {
+    user: User!,
+    startTime: LocalDateTime!,
+    endTime: LocalDateTime!,
+    memo: String!,
+    id: ID!
+    saveType: ExerciseSaveType!
+}
+
+extend type ExerciseSessionRecord  {
+    exerciseExerciseRecords: [ExerciseExerciseRecord!]!
+}

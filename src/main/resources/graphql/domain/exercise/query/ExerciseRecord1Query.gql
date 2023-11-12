@@ -1,4 +1,0 @@
-extend type Query {
-    exerciseRecord1sByDate(date: LocalDate!): [ExerciseRecord1!]!
-    exerciseRecord1ById(id: Long!): ExerciseRecord1!
-}

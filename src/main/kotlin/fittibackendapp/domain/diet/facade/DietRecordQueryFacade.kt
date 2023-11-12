@@ -1,31 +1,32 @@
 package fittibackendapp.domain.diet.facade
 
-import fittibackendapp.domain.diet.service.DietDietRecordService
-import fittibackendapp.domain.diet.service.DietRecordService
-import fittibackendapp.domain.diet.service.DietService
+import fittibackendapp.domain.diet.service.DietFoodRecordService
+import fittibackendapp.domain.diet.service.DietMealRecordService
+import fittibackendapp.domain.diet.service.NutritionService
 import fittibackendapp.dto.PcfAmountInGramsDto
 import org.springframework.stereotype.Service
 import java.time.LocalDate
 
 @Service
-class DietRecordQueryFacade (
-    private val dietService: DietService,
-    private val dietRecordService: DietRecordService,
-    private val dietDietRecordService: DietDietRecordService
-){
-    fun getPcfAmountInGramsBetweenDays(userId: Long, fromDate: LocalDate, toDate: LocalDate) : PcfAmountInGramsDto {
-        val dietRecordIds = dietRecordService.findDietRecordsBetweenDays(userId, fromDate, toDate).map { it.id }
-        val dietDietRecords = dietDietRecordService.findAllByDietRecordIds(dietRecordIds)
-        val diets = dietService.findAllByIds(dietDietRecords.map { it.diet.id }.distinct())
-        val dietMap = diets.associateBy { it.id }
+class DietRecordQueryFacade(
+    private val nutritionService: NutritionService,
+    private val dietMealRecordService: DietMealRecordService,
+    private val dietFoodRecordService: DietFoodRecordService
+) {
+    fun getPcfAmountInGramsBetweenDays(userId: Long, fromDate: LocalDate, toDate: LocalDate): PcfAmountInGramsDto {
+        val dietMealRecordIds =
+            dietMealRecordService.findDietMealRecordsBetweenDays(userId, fromDate, toDate).map { it.id }
+        val dietFoodRecords = dietFoodRecordService.findAllByDietMealRecordIds(dietMealRecordIds)
+        val nutritions = nutritionService.findAllByIds(dietFoodRecords.map { it.nutrition.id }.distinct())
+        val nutritionMap = nutritions.associateBy { it.id }
         var protein = 0.0
         var carbohydrate = 0.0
         var fat = 0.0
-        dietDietRecords.forEach {
-            val diet = dietMap[it.diet.id]!!
-            protein += diet.protein * it.weight
-            carbohydrate += diet.carbohydrate * it.weight
-            fat += diet.fat * it.weight
+        dietFoodRecords.forEach {
+            val nutrition = nutritionMap[it.nutrition.id]!!
+            protein += nutrition.protein * it.weight
+            carbohydrate += nutrition.carbohydrate * it.weight
+            fat += nutrition.fat * it.weight
         }
         return PcfAmountInGramsDto(protein, carbohydrate, fat)
     }
