@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: renaming exercise and diet record tables
+      author: dicohy27
+      changes:
+        - renameTable:
+            oldTableName: exercise_record_1
+            newTableName: exercise_session_record
+        - renameTable:
+            oldTableName: exercise_record_2
+            newTableName: exercise_exercise_record
+        - renameTable:
+            oldTableName: exercise_record_3
+            newTableName: exercise_set_record
+        - renameTable:
+            oldTableName: diet_record
+            newTableName: diet_meal_record
+        - renameTable:
+            oldTableName: diet_diet_record
+            newTableName: diet_food_record
+        - renameTable:
+            oldTableName: diet
+            newTableName: nutrition
