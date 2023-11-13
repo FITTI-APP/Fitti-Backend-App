@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: renaming column names in exercise record tables
+      author: dicohy27
+      changes:
+        - dropForeignKeyConstraint:
+            constraintName: fk_exercise_record_2_exercise_record_1_id
+            baseTableName: exercise_exercise_record
+        - dropForeignKeyConstraint:
+            constraintName: fk_exercise_record_3_exercise_record_2_id
+            baseTableName: exercise_set_record
