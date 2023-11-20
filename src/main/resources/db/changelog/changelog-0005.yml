@@ -1,0 +1,67 @@
+databaseChangeLog:
+  - changeSet:
+      id: renaming exercise and diet record tables
+      author: dicohy27
+      changes:
+        - dropForeignKeyConstraint:
+            constraintName: fk_exercise_record_2_exercise_record_1_id
+            baseTableName: exercise_record_2
+        - dropForeignKeyConstraint:
+            constraintName: fk_exercise_record_3_exercise_record_2_id
+            baseTableName: exercise_record_3
+        - renameTable:
+            oldTableName: exercise_record_1
+            newTableName: exercise_session_record
+        - renameTable:
+            oldTableName: exercise_record_2
+            newTableName: exercise_exercise_record
+        - renameTable:
+            oldTableName: exercise_record_3
+            newTableName: exercise_set_record
+        - renameTable:
+            oldTableName: diet_record
+            newTableName: diet_meal_record
+        - renameTable:
+            oldTableName: diet_diet_record
+            newTableName: diet_food_record
+        - renameTable:
+            oldTableName: diet
+            newTableName: nutrition
+        - dropColumn:
+            columnName: exercise_record_1_id
+            tableName: exercise_exercise_record
+        - dropColumn:
+            columnName: exercise_record_2_id
+            tableName: exercise_set_record
+        - addColumn:
+            columns:
+              - column:
+                  name: exercise_session_record_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+            tableName: exercise_exercise_record
+        - addColumn:
+            columns:
+              - column:
+                  name: exercise_exercise_record_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+            tableName: exercise_set_record
+        - addForeignKeyConstraint:
+            baseTableName: exercise_exercise_record
+            baseColumnNames: exercise_session_record_id
+            constraintName: fk_exercise_exercise_record_exercise_session_record_id
+            referencedTableName: exercise_session_record
+            referencedColumnNames: id
+            onDelete: CASCADE
+            onUpdate: CASCADE
+        - addForeignKeyConstraint:
+            baseTableName: exercise_set_record
+            baseColumnNames: exercise_exercise_record_id
+            constraintName: fk_exercise_set_record_exercise_exercise_record_id
+            referencedTableName: exercise_exercise_record
+            referencedColumnNames: id
+            onDelete: CASCADE
+            onUpdate: CASCADE

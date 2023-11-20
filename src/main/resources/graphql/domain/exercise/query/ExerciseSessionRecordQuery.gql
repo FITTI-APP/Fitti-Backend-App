@@ -1,0 +1,4 @@
+extend type Query {
+    exerciseSessionRecordsByDate(date: LocalDate!): [ExerciseSessionRecord!]!
+    exerciseSessionRecordById(id: Long!): ExerciseSessionRecord!
+}

@@ -1,0 +1,9 @@
+input ExerciseSetRecordInput{
+    exerciseSetRecordId: Long,
+    memo: String!,
+    order: Int!,
+    weight: Float!,
+    reps: Int!,
+    distance: Float!,
+    totalTime: Duration!
+}

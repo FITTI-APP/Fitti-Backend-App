@@ -1,100 +1,100 @@
 package fittibackendapp.domain.exercise.facade
 
-import fittibackendapp.domain.exercise.graphql.mutation.input.ExerciseRecord1Input
-import fittibackendapp.domain.exercise.graphql.mutation.input.ExerciseRecord2Input
-import fittibackendapp.domain.exercise.graphql.mutation.input.ExerciseRecord3Input
-import fittibackendapp.domain.exercise.service.ExerciseRecord1Service
-import fittibackendapp.domain.exercise.service.ExerciseRecord2Service
-import fittibackendapp.domain.exercise.service.ExerciseRecord3Service
-import fittibackendapp.dto.ExerciseRecord1Dto
-import fittibackendapp.dto.ExerciseRecord2Dto
-import fittibackendapp.dto.ExerciseRecord3Dto
+import fittibackendapp.domain.exercise.graphql.mutation.input.ExerciseExerciseRecordInput
+import fittibackendapp.domain.exercise.graphql.mutation.input.ExerciseSessionRecordInput
+import fittibackendapp.domain.exercise.graphql.mutation.input.ExerciseSetRecordInput
+import fittibackendapp.domain.exercise.service.ExerciseExerciseRecordService
+import fittibackendapp.domain.exercise.service.ExerciseSessionRecordService
+import fittibackendapp.domain.exercise.service.ExerciseSetRecordService
+import fittibackendapp.dto.ExerciseExerciseRecordDto
+import fittibackendapp.dto.ExerciseSessionRecordDto
+import fittibackendapp.dto.ExerciseSetRecordDto
 import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
 
 @Service
 class ExerciseRecordMutationFacade(
-    private val exerciseRecord1Service: ExerciseRecord1Service,
-    private val exerciseRecord2Service: ExerciseRecord2Service,
-    private val exerciseRecord3Service: ExerciseRecord3Service,
+    private val exerciseSessionRecordService: ExerciseSessionRecordService,
+    private val exerciseExerciseRecordService: ExerciseExerciseRecordService,
+    private val exerciseSetRecordService: ExerciseSetRecordService,
 ) {
 
     @Transactional
-    fun createOrUpdateExerciseRecord1(
+    fun createOrUpdateExerciseSessionRecord(
         userId: Long,
-        exerciseRecord1Input: ExerciseRecord1Input
-    ): ExerciseRecord1Dto {
-        if (exerciseRecord1Input.exerciseRecord1Id == null) {
-            exerciseRecord1Service.create(
+        exerciseSessionRecordInput: ExerciseSessionRecordInput
+    ): ExerciseSessionRecordDto {
+        if (exerciseSessionRecordInput.exerciseSessionRecordId == null) {
+            exerciseSessionRecordService.create(
                 userId = userId,
-                memo = exerciseRecord1Input.memo,
-                startTime = exerciseRecord1Input.startTime,
-                endTime = exerciseRecord1Input.endTime,
-                saveTypeId = exerciseRecord1Input.saveTypeId,
+                memo = exerciseSessionRecordInput.memo,
+                startTime = exerciseSessionRecordInput.startTime,
+                endTime = exerciseSessionRecordInput.endTime,
+                saveTypeId = exerciseSessionRecordInput.saveTypeId,
             )
         }
         else {
-            exerciseRecord1Service.update(
+            exerciseSessionRecordService.update(
                 userId = userId,
-                exerciseRecord1Id = exerciseRecord1Input.exerciseRecord1Id,
-                memo = exerciseRecord1Input.memo,
-                startTime = exerciseRecord1Input.startTime,
-                endTime = exerciseRecord1Input.endTime,
-                saveTypeId = exerciseRecord1Input.saveTypeId,
+                exerciseSessionRecordId = exerciseSessionRecordInput.exerciseSessionRecordId,
+                memo = exerciseSessionRecordInput.memo,
+                startTime = exerciseSessionRecordInput.startTime,
+                endTime = exerciseSessionRecordInput.endTime,
+                saveTypeId = exerciseSessionRecordInput.saveTypeId,
             )
         }.run {
-            createOrUpdateExerciseRecord2s(
+            createOrUpdateExerciseExerciseRecords(
                 userId = userId,
-                exerciseRecord1Id = this.id,
-                exerciseRecord2Inputs = exerciseRecord1Input.exerciseRecord2Inputs,
+                exerciseSessionRecordId = this.id,
+                exerciseExerciseRecordInputs = exerciseSessionRecordInput.exerciseExerciseRecordInputs,
             )
             return this
         }
     }
 
     @Transactional
-    fun createOrUpdateExerciseRecord2s(
+    fun createOrUpdateExerciseExerciseRecords(
         userId: Long,
-        exerciseRecord1Id: Long,
-        exerciseRecord2Inputs: List<ExerciseRecord2Input>
-    ): List<ExerciseRecord2Dto> {
-        return exerciseRecord2Inputs.map {
-            if (it.exerciseRecord2Id == null) {
-                exerciseRecord2Service.create(
-                    exerciseRecord1Id = exerciseRecord1Id,
+        exerciseSessionRecordId: Long,
+        exerciseExerciseRecordInputs: List<ExerciseExerciseRecordInput>
+    ): List<ExerciseExerciseRecordDto> {
+        return exerciseExerciseRecordInputs.map {
+            if (it.exerciseExerciseRecordId == null) {
+                exerciseExerciseRecordService.create(
+                    exerciseSessionRecordId = exerciseSessionRecordId,
                     exerciseId = it.exerciseId,
                     order = it.order,
                     memo = it.memo,
                 )
             }
             else {
-                exerciseRecord2Service.update(
-                    exerciseRecord1Id = exerciseRecord1Id,
-                    exerciseRecord2Id = it.exerciseRecord2Id,
+                exerciseExerciseRecordService.update(
+                    exerciseSessionRecordId = exerciseSessionRecordId,
+                    exerciseExerciseRecordId = it.exerciseExerciseRecordId,
                     exerciseId = it.exerciseId,
                     order = it.order,
                     memo = it.memo,
                 )
             }.apply {
-                createOrUpdateExerciseRecord3s(
+                createOrUpdateExerciseSetRecords(
                     userId = userId,
-                    exerciseRecord2Id = this.id,
-                    exerciseRecord3Inputs = it.exerciseRecord3Inputs,
+                    exerciseExerciseRecordId = this.id,
+                    exerciseSetRecordInputs = it.exerciseSetRecordInputs,
                 )
             }
         }
     }
 
     @Transactional
-    fun createOrUpdateExerciseRecord3s(
+    fun createOrUpdateExerciseSetRecords(
         userId: Long,
-        exerciseRecord2Id: Long,
-        exerciseRecord3Inputs: List<ExerciseRecord3Input>
-    ): List<ExerciseRecord3Dto> {
-        return exerciseRecord3Inputs.map {
-            if (it.exerciseRecord3Id == null) {
-                exerciseRecord3Service.create(
-                    exerciseRecord2Id = exerciseRecord2Id,
+        exerciseExerciseRecordId: Long,
+        exerciseSetRecordInputs: List<ExerciseSetRecordInput>
+    ): List<ExerciseSetRecordDto> {
+        return exerciseSetRecordInputs.map {
+            if (it.exerciseSetRecordId == null) {
+                exerciseSetRecordService.create(
+                    exerciseExerciseRecordId = exerciseExerciseRecordId,
                     weight = it.weight,
                     reps = it.reps,
                     order = it.order,
@@ -104,9 +104,9 @@ class ExerciseRecordMutationFacade(
                 )
             }
             else {
-                exerciseRecord3Service.update(
-                    exerciseRecord2Id = exerciseRecord2Id,
-                    exerciseRecord3Id = it.exerciseRecord3Id,
+                exerciseSetRecordService.update(
+                    exerciseExerciseRecordId = exerciseExerciseRecordId,
+                    exerciseSetRecordId = it.exerciseSetRecordId,
                     weight = it.weight,
                     order = it.order,
                     memo = it.memo,
@@ -119,45 +119,45 @@ class ExerciseRecordMutationFacade(
     }
 
     @Transactional
-    fun deleteExerciseRecord2s(
-        exerciseRecord1Id: Long?,
-        exerciseRecord2Inputs: List<ExerciseRecord2Input>
+    fun deleteExerciseExerciseRecords(
+        exerciseSessionRecordId: Long?,
+        exerciseExerciseRecordInputs: List<ExerciseExerciseRecordInput>
     ) {
-        exerciseRecord2Service
-            .listExerciseRecord2sByExerciseRecord1Id(exerciseRecord1Id)
+        exerciseExerciseRecordService
+            .listExerciseExerciseRecordsByExerciseSessionRecordId(exerciseSessionRecordId)
             .ifEmpty { null }
             ?.run {
                 map { it.id }
                     .filter {
-                        it !in exerciseRecord2Inputs
-                            .map { inputs -> inputs.exerciseRecord2Id }
+                        it !in exerciseExerciseRecordInputs
+                            .map { inputs -> inputs.exerciseExerciseRecordId }
                     }
-                    .run { exerciseRecord2Service.deleteAll(this) }
+                    .run { exerciseExerciseRecordService.deleteAll(this) }
             }
 
-        exerciseRecord2Inputs.map {
-            deleteExerciseRecord3s(
-                exerciseRecord2Id = it.exerciseRecord2Id,
-                exerciseRecord3Inputs = it.exerciseRecord3Inputs,
+        exerciseExerciseRecordInputs.map {
+            deleteExerciseSetRecords(
+                exerciseExerciseRecordId = it.exerciseExerciseRecordId,
+                exerciseSetRecordInputs = it.exerciseSetRecordInputs,
             )
         }
     }
 
     @Transactional
-    fun deleteExerciseRecord3s(
-        exerciseRecord2Id: Long?,
-        exerciseRecord3Inputs: List<ExerciseRecord3Input>
+    fun deleteExerciseSetRecords(
+        exerciseExerciseRecordId: Long?,
+        exerciseSetRecordInputs: List<ExerciseSetRecordInput>
     ) {
-        exerciseRecord3Service
-            .listExerciseRecord3sByExerciseRecord2Id(exerciseRecord2Id)
+        exerciseSetRecordService
+            .listExerciseSetRecordsByExerciseExerciseRecordId(exerciseExerciseRecordId)
             .ifEmpty { null }
             ?.run {
                 map { it.id }
                     .filter {
-                        it !in exerciseRecord3Inputs
-                            .map { inputs -> inputs.exerciseRecord3Id }
+                        it !in exerciseSetRecordInputs
+                            .map { inputs -> inputs.exerciseSetRecordId }
                     }
-                    .run { exerciseRecord3Service.deleteAll(this) }
+                    .run { exerciseSetRecordService.deleteAll(this) }
             }
     }
 }

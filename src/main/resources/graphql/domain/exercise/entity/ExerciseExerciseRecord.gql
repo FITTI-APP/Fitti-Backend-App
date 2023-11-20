@@ -1,0 +1,11 @@
+type ExerciseExerciseRecord{
+    exerciseSessionRecord: ExerciseSessionRecord!,
+    exercise: Exercise!,
+    order: Int!,
+    memo: String!,
+    id: ID!
+}
+
+extend type ExerciseExerciseRecord {
+    exerciseSetRecords: [ExerciseSetRecord!]!
+}

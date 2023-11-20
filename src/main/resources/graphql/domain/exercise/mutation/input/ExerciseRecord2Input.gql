@@ -1,7 +1,0 @@
-input  ExerciseRecord2Input{
-    exerciseRecord2Id: Long,
-    exerciseId: Long!,
-    order: Int!,
-    memo: String!,
-    exerciseRecord3Inputs: [ExerciseRecord3Input!]!
-}

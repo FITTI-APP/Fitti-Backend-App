@@ -1,9 +1,9 @@
 package fittibackendapp.dto.mapstruct
 
-import fittibackendapp.domain.diet.entity.Diet
-import fittibackendapp.dto.DietDto
+import fittibackendapp.domain.diet.entity.Nutrition
+import fittibackendapp.dto.NutritionDto
 import org.mapstruct.Mapper
 import org.mapstruct.MappingConstants
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
-interface DietMapStruct : GenericMapStruct<Diet, DietDto>
+interface DietMapStruct: GenericMapStruct<Nutrition, NutritionDto>

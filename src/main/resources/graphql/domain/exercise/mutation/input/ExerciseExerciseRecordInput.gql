@@ -1,0 +1,7 @@
+input ExerciseExerciseRecordInput{
+    exerciseExerciseRecordId: Long,
+    exerciseId: Long!,
+    order: Int!,
+    memo: String!,
+    exerciseSetRecordInputs: [ExerciseSetRecordInput!]!
+}
