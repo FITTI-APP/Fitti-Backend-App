@@ -29,7 +29,6 @@ class ExerciseSessionRecordQueryMapper(
         id: Long,
     ): ExerciseSessionRecordDto {
         val userId = 1L
-
         return exerciseSessionRecordService.findById(
             id = id,
             userId = userId,
