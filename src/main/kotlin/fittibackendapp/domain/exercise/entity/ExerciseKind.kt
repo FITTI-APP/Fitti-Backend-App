@@ -17,11 +17,6 @@ class ExerciseKind(
     @NotNull
     @Column(name = "name", nullable = false)
     var name: String,
-
-    @Size(max = 255)
-    @NotNull
-    @Column(name = "type", nullable = false)
-    var type: String
 ): AuditLoggingEnumBase() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
