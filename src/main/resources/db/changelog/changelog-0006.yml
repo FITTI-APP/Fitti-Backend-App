@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: Edit exercise_kind Table drop the type column.
+      author: TwoCastleNine
+      changes:
+        - dropColumn:
+            tableName: exercise_kind
+            columnName: type

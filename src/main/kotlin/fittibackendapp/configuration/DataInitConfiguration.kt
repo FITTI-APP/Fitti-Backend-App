@@ -58,22 +58,31 @@ class DataInitConfiguration(
     @EventListener(ApplicationStartingEvent::class)
     fun initExerciseKindData() {
         val exercises = listOf(
-            Pair("종아리", "하체"),
-            Pair("허벅지", "하체"),
-            Pair("엉덩이", "하체"),
-            Pair("복근", "상체"),
-            Pair("가슴", "상체"),
-            Pair("어깨", "상체"),
-            Pair("등", "상체"),
-            Pair("삼두", "상체"),
-            Pair("이두", "상체"),
-            Pair("전완", "상체"),
+            "하체",
+            "복근",
+            "가슴",
+            "어깨",
+            "등",
+            "팔",
         )
+        val exerciseKinds = exerciseKindRepository.findAll()
 
-        exercises.forEach { (name, type) ->
-            if (exerciseKindRepository.findByName(name) == null) {
-                exerciseKindRepository.save(ExerciseKind(name = name, type = type))
+        val shouldDeleteExerciseKinds = exerciseKinds.filter { exerciseKind ->
+            !exercises.contains(exerciseKind.name)
+        }
+        exerciseKindRepository.deleteAll(shouldDeleteExerciseKinds)
+
+        val shouldAddExercises = exercises.filter { exercise ->
+            exerciseKinds.none { exerciseKind ->
+                exerciseKind.name == exercise
             }
         }
+        exerciseKindRepository.saveAll(
+            shouldAddExercises.map { exercise ->
+                ExerciseKind(
+                    name = exercise,
+                )
+            },
+        )
     }
 }
