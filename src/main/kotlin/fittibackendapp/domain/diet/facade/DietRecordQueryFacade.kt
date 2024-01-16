@@ -4,6 +4,7 @@ import fittibackendapp.domain.diet.service.DietFoodRecordService
 import fittibackendapp.domain.diet.service.DietMealRecordService
 import fittibackendapp.domain.diet.service.NutritionService
 import fittibackendapp.dto.PcfAmountInGramsDto
+import fittibackendapp.dto.PcfRatioDto
 import org.springframework.stereotype.Service
 import java.time.LocalDate
 
@@ -29,5 +30,15 @@ class DietRecordQueryFacade(
             fat += nutrition.fat * it.weight
         }
         return PcfAmountInGramsDto(protein, carbohydrate, fat)
+    }
+
+    fun getPcfRatioInGramsBetweenDays(userId: Long, fromDate: LocalDate, toDate: LocalDate): PcfRatioDto {
+        val pcfAmountInGrams = getPcfAmountInGramsBetweenDays(userId, fromDate, toDate)
+        val totalAmountInGrams = pcfAmountInGrams.protein + pcfAmountInGrams.carbohydrate + pcfAmountInGrams.fat
+        return PcfRatioDto(
+            pcfAmountInGrams.protein / totalAmountInGrams,
+            pcfAmountInGrams.carbohydrate / totalAmountInGrams,
+            pcfAmountInGrams.fat / totalAmountInGrams
+        )
     }
 }
