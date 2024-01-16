@@ -45,6 +45,7 @@ class DietRecordQueryFacade(
     }
 
     fun getTargetPcfRatio(userId: Long): PcfRatioDto {
-        return targetPcfRatioService.findByUserId(userId)
+        val targetPcfRatio = targetPcfRatioService.findByUserId(userId)
+        return PcfRatioDto(targetPcfRatio.protein, targetPcfRatio.carbohydrate, targetPcfRatio.fat)
     }
 }
