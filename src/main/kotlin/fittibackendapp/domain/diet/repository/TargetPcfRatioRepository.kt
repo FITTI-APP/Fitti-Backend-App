@@ -4,5 +4,5 @@ import fittibackendapp.domain.diet.entity.TargetPcfRatio
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface TargetPcfRatioRepository : JpaRepository<TargetPcfRatio, Long> {
-    fun findByUserId(userId: Long): TargetPcfRatio
+    fun findByUserId(userId: Long): TargetPcfRatio?
 }
