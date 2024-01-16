@@ -1,3 +1,4 @@
 extend type Query{
     getPcfAmountInGramsBetweenDays(fromDate: LocalDate!, toDate: LocalDate!): PcfAmountInGrams!
+    getPcfRatioInGramsBetweenDays(fromDate: LocalDate!, toDate: LocalDate!): PcfRatio!
 }
