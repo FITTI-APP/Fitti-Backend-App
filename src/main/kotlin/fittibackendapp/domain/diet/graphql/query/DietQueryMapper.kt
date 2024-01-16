@@ -37,4 +37,11 @@ class DietQueryMapper(
 
         return dietRecordQueryFacade.getPcfRatioInGramsBetweenDays(userId, fromDate, toDate)
     }
+
+    @QueryMapping
+    fun getTargetPcfRatio(): PcfRatioDto {
+        val userId = argumentResolver.getUserId()
+
+        return dietRecordQueryFacade.getTargetPcfRatio(userId)
+    }
 }
