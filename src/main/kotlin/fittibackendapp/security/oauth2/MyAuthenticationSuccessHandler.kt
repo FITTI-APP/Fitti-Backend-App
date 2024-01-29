@@ -1,4 +1,4 @@
-package fittibackendapp.common.security.component
+package fittibackendapp.security.oauth2
 
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
@@ -10,7 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder
 import java.nio.charset.StandardCharsets
 
 @Component
-class MyAuthenticationSuccessHandler : AuthenticationSuccessHandler {
+class MyAuthenticationSuccessHandler: AuthenticationSuccessHandler {
     override fun onAuthenticationSuccess(
         request: HttpServletRequest,
         response: HttpServletResponse,

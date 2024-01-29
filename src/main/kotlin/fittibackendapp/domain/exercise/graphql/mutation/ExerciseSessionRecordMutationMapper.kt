@@ -18,7 +18,7 @@ class ExerciseSessionRecordMutationMapper(
         @Argument
         exerciseSessionRecordInput: ExerciseSessionRecordInput
     ): ExerciseSessionRecordDto {
-        val userId = 1L
+        val userId = argumentResolver.getUserId()
 
         val exerciseExerciseRecordInputs = exerciseSessionRecordInput.exerciseExerciseRecordInputs
         exerciseRecordMutationFacade.deleteExerciseExerciseRecords(
