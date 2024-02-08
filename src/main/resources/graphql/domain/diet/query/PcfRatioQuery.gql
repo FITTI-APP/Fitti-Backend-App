@@ -1,0 +1,4 @@
+extend type Query{
+    # fromDate 부터 toDate 까지 섭취한 탄단지 gram 수의 비율
+    getPcfRatioInGramsBetweenDays(fromDate: LocalDate!, toDate: LocalDate!): PcfRatio!
+}

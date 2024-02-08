@@ -3,7 +3,9 @@ package fittibackendapp.domain.diet.facade
 import fittibackendapp.domain.diet.service.DietFoodRecordService
 import fittibackendapp.domain.diet.service.DietMealRecordService
 import fittibackendapp.domain.diet.service.NutritionService
+import fittibackendapp.domain.diet.service.TargetPcfRatioService
 import fittibackendapp.dto.PcfAmountInGramsDto
+import fittibackendapp.dto.PcfRatioDto
 import org.springframework.stereotype.Service
 import java.time.LocalDate
 
@@ -11,7 +13,8 @@ import java.time.LocalDate
 class DietRecordQueryFacade(
     private val nutritionService: NutritionService,
     private val dietMealRecordService: DietMealRecordService,
-    private val dietFoodRecordService: DietFoodRecordService
+    private val dietFoodRecordService: DietFoodRecordService,
+    private val targetPcfRatioService: TargetPcfRatioService
 ) {
     fun getPcfAmountInGramsBetweenDays(userId: Long, fromDate: LocalDate, toDate: LocalDate): PcfAmountInGramsDto {
         val dietMealRecordIds =
@@ -29,5 +32,20 @@ class DietRecordQueryFacade(
             fat += nutrition.fat * it.weight
         }
         return PcfAmountInGramsDto(protein, carbohydrate, fat)
+    }
+
+    fun getPcfRatioInGramsBetweenDays(userId: Long, fromDate: LocalDate, toDate: LocalDate): PcfRatioDto {
+        val pcfAmountInGrams = getPcfAmountInGramsBetweenDays(userId, fromDate, toDate)
+        val totalAmountInGrams = pcfAmountInGrams.protein + pcfAmountInGrams.carbohydrate + pcfAmountInGrams.fat
+        return PcfRatioDto(
+            pcfAmountInGrams.protein / totalAmountInGrams,
+            pcfAmountInGrams.carbohydrate / totalAmountInGrams,
+            pcfAmountInGrams.fat / totalAmountInGrams
+        )
+    }
+
+    fun getTargetPcfRatio(userId: Long): PcfRatioDto {
+        val targetPcfRatio = targetPcfRatioService.findByUserId(userId)
+        return PcfRatioDto(targetPcfRatio.protein, targetPcfRatio.carbohydrate, targetPcfRatio.fat)
     }
 }
