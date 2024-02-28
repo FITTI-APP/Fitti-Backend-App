@@ -2,8 +2,8 @@
 
 LOCAL_PORT=5510
 DB_PORT=3306
-HOST=fitti-develop-database.cmzpqp9pc6gs.ap-northeast-2.rds.amazonaws.com
-TARGET_INSTANCE=i-072c1871abe75ae7e
+HOST=awseb-e-jbmkfabqb8-stack-awsebrdsdatabase-36e4du1mqcmb.czfhscjza5go.ap-northeast-2.rds.amazonaws.com
+TARGET_INSTANCE=i-09b8cb6e38e6d4a19
 
 
 if [[ -z "$AWS_ACCESS_KEY_ID" ]]; then
