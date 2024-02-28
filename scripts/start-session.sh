@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# 만약 windows 라면 wsl로 실행해야함. Intellij의 Line Separators를 LF로 설정해야함.
 LOCAL_PORT=5510
 DB_PORT=3306
 HOST=awseb-e-jbmkfabqb8-stack-awsebrdsdatabase-36e4du1mqcmb.czfhscjza5go.ap-northeast-2.rds.amazonaws.com
