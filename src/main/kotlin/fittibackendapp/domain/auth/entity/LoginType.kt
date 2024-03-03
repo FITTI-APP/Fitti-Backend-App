@@ -1,5 +1,6 @@
 package fittibackendapp.domain.auth.entity
 
+import fittibackendapp.common.entitiybase.AuditLoggingBase
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -21,7 +22,7 @@ class LoginType(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     var id: Long = 0
-) {
+): AuditLoggingBase() {
     companion object {
         const val EMAIL = "EMAIL"
         const val GOOGLE = "GOOGLE"

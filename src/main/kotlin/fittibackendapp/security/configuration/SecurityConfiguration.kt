@@ -6,6 +6,8 @@ import fittibackendapp.common.security.bean.JwtFilter
 import fittibackendapp.common.security.component.CustomPasswordEncoder
 import fittibackendapp.common.security.component.JwtVerifier
 import fittibackendapp.common.security.type.AuthorizeRequestsApplier
+import fittibackendapp.domain.auth.facade.OAuth2CustomService
+import fittibackendapp.security.oauth2.MyAuthenticationSuccessHandler
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.context.annotation.AdviceMode
 import org.springframework.context.annotation.Bean
@@ -31,6 +33,8 @@ class SecurityConfiguration(
     private val authorizeRequestsApplier: AuthorizeRequestsApplier,
     @Suppress("SpringJavaInjectionPointsAutowiringInspection")
     private val jwtVerifier: JwtVerifier,
+    private val myAuthenticationSuccessHandler: MyAuthenticationSuccessHandler,
+    private val oAuth2CustomService: OAuth2CustomService,
 ) {
     @Bean
     fun passwordEncoder() = CustomPasswordEncoder()
@@ -46,8 +50,8 @@ class SecurityConfiguration(
 
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
-        return http.cors {
-
+        http.cors {
+            it.disable()
         }.csrf {
             it.disable()
         }.exceptionHandling {
@@ -56,16 +60,19 @@ class SecurityConfiguration(
         }.sessionManagement {
             it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         }.authorizeHttpRequests {
+            // 요청 경로 관련 설정. 현재 무엇이든지 받는다는 의미.
             it.shouldFilterAllDispatcherTypes(false)
-        }.apply(authorizeRequestsApplier) // .oauth2Login() todo
-            // .successHandler()
-            // .userInfoEndpoint()
-            // .userService()
-            // .addFilterBefore(
-            //     jwtFilter(),
-            //     UsernamePasswordAuthenticationFilter::class.java,
-            // )
-            .build()
+        }.apply(authorizeRequestsApplier)
+            .oauth2Login()
+            // .successHandler(myAuthenticationSuccessHandler)
+            .userInfoEndpoint()
+            .userService(oAuth2CustomService)
+
+        // .addFilterBefore(
+        //     jwtFilter(),
+        //     UsernamePasswordAuthenticationFilter::class.java,
+        // )
+        return http.build()
     }
 
     companion object {
