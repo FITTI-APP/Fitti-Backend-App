@@ -1,6 +1,8 @@
 package fittibackendapp.common.configuration
 
+import fittibackendapp.domain.auth.entity.LoginType
 import fittibackendapp.domain.auth.entity.Role
+import fittibackendapp.domain.auth.repository.LoginTypeRepository
 import fittibackendapp.domain.auth.repository.RoleRepository
 import fittibackendapp.domain.exercise.entity.ExerciseKind
 import fittibackendapp.domain.exercise.entity.ExerciseSaveType
@@ -18,8 +20,8 @@ class DataInitConfiguration(
     private val roleRepository: RoleRepository,
     private val exerciseKindRepository: ExerciseKindRepository,
     private val exerciseSaveTypeRepository: ExerciseSaveTypeRepository,
-
-    ) {
+    private val loginTypeRepository: LoginTypeRepository,
+) {
     @Bean
     @Transactional
     @TransactionalEventListener(ApplicationStartingEvent::class)
@@ -29,6 +31,17 @@ class DataInitConfiguration(
             roleRepository.save(Role(name = Role.ROLE_USER))
         if (roleRepository.findByName(Role.ROLE_ADMIN) == null)
             roleRepository.save(Role(name = Role.ROLE_ADMIN))
+
+        if (loginTypeRepository.findByName("GOOGLE") == null)
+            loginTypeRepository.save(LoginType(name = LoginType.GOOGLE))
+        if (loginTypeRepository.findByName("KAKAO") == null)
+            loginTypeRepository.save(LoginType(name = LoginType.KAKAO))
+        if (loginTypeRepository.findByName("NAVER") == null)
+            loginTypeRepository.save(LoginType(name = LoginType.NAVER))
+        if (loginTypeRepository.findByName("FACEBOOK") == null)
+            loginTypeRepository.save(LoginType(name = LoginType.FACEBOOK))
+        if (loginTypeRepository.findByName("EMAIL") == null)
+            loginTypeRepository.save(LoginType(name = LoginType.EMAIL))
     }
 
     @Bean

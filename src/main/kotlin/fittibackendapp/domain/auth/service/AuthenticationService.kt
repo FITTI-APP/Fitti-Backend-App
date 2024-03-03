@@ -4,8 +4,10 @@ import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import fittibackendapp.common.exception.NotRegisteredEmailException
 import fittibackendapp.common.exception.UnCorrectedPasswordException
+import fittibackendapp.domain.auth.entity.LoginType
 import fittibackendapp.domain.auth.entity.Role
 import fittibackendapp.domain.auth.entity.User
+import fittibackendapp.domain.auth.repository.LoginTypeRepository
 import fittibackendapp.domain.auth.repository.RoleRepository
 import fittibackendapp.domain.auth.repository.UserRepository
 import fittibackendapp.exception.DuplicatedEmailException
@@ -22,6 +24,7 @@ class AuthenticationService(
     private val userRepository: UserRepository,
     private val roleRepository: RoleRepository,
     private val passwordEncoder: PasswordEncoder,
+    private val loginTypeRepository: LoginTypeRepository,
 ) {
     @Transactional
     fun register(
@@ -30,6 +33,9 @@ class AuthenticationService(
         name: String,
     ): Long {
         val role = roleRepository.findByName(Role.ROLE_USER) ?: throw RuntimeException("ROLE_USER가 없습니다.")
+        val loginType =
+            loginTypeRepository.findByName(LoginType.EMAIL) ?: throw RuntimeException("EMAIL Login Type이  없습니다.")
+
         val existUser = userRepository.findByEmail(email)
         if (existUser != null) {
             throw DuplicatedEmailException()
@@ -39,6 +45,7 @@ class AuthenticationService(
             password = passwordEncoder.encode(password),
             name = name,
             role = role,
+            loginType = loginType,
         ).apply {
             userRepository.save(this)
         }
