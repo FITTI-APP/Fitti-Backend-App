@@ -67,7 +67,6 @@ class SecurityConfiguration(
             // .successHandler(myAuthenticationSuccessHandler)
             .userInfoEndpoint()
             .userService(oAuth2CustomService)
-
         // .addFilterBefore(
         //     jwtFilter(),
         //     UsernamePasswordAuthenticationFilter::class.java,
