@@ -17,8 +17,6 @@ class MyAuthenticationSuccessHandler: AuthenticationSuccessHandler {
         authentication: Authentication
     ) {
         val oAuth2User = authentication.principal as OAuth2User
-        println("SuccessHandler oAuth2User: $oAuth2User")
-
         response.sendRedirect(
             UriComponentsBuilder.fromUriString(REDIRECT_URI)
                 .queryParam("accessToken", "accessToken")

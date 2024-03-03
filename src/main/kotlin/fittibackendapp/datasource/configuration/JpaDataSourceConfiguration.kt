@@ -34,8 +34,7 @@ class JpaDataSourceConfiguration(
     @Primary
     @Bean
     @ConfigurationProperties("spring.datasource.hikari")
-    fun dataSource(): DataSource { // todo datasource docker 설정 후
-
+    fun dataSource(): DataSource {
         // secretsManagerService.getDataSourceConfig(profile) todo
         val dataSource = HikariDataSourceUtil.createHikariDataSource(
             poolName = FittiBackendApp.PROJECT,
