@@ -100,6 +100,11 @@ class OAuth2CustomService(
             email = response.get("email") as String
             name = response.get("name") as String
         }
+        else if (loginType == LoginType.FACEBOOK) {
+            email = attribute.get("email") as String
+            name = attribute.get("name") as String
+        }
+
         return Pair(email, name)
     }
 

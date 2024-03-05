@@ -3,6 +3,16 @@ spring:
     oauth2:
       client:
         registration:
+          facebook:
+            client-id: "937430724441233"
+            client-secret: "b45e1c38c53967f1722591140db50afa"
+            #            redirect-uri: "{baseUrl}/login/oauth2/code/facebook"
+            redirect-uri: "http://localhost:8080/login/oauth2/code/facebook"
+            #            authorization-grant-type: authorization_code
+            scope:
+              - email
+              - public_profile
+          #            client-name: Facebook
           naver:
             client-id: "idvEjrVyEM0SM7AtoSz_"
             client-secret: "fVmGtsHZfp"
