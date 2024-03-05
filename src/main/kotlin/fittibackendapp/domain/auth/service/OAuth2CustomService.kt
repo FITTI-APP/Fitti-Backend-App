@@ -1,4 +1,4 @@
-package fittibackendapp.domain.auth.facade
+package fittibackendapp.domain.auth.service
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
@@ -24,8 +24,6 @@ import java.util.Date
 
 @Service
 class OAuth2CustomService(
-    // private val authenticationService: AuthenticationService,
-    // private val userService: UserService,
     private val userRepository: UserRepository,
     private val roleRepository: RoleRepository,
     private val loginTypeRepository: LoginTypeRepository,
@@ -97,7 +95,7 @@ class OAuth2CustomService(
         val loginType =
             loginTypeRepository.findByName(oauth2LoginType) ?: throw RuntimeException("EMAIL Login Type이  없습니다.")
 
-        val user = User(
+        User(
             email = email,
             password = "",
             name = name,
