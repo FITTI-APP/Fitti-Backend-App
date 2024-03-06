@@ -135,10 +135,10 @@ dependencies {
     testImplementation("org.springframework.batch", "spring-batch-test")
     testImplementation("org.springframework.graphql", "spring-graphql-test")
     testImplementation("org.springframework.security", "spring-security-test")
-
+    implementation("io.github.microutils:kotlin-logging-jvm:2.0.10")
     //	testRuntimeOnly("com.h2database", "h2")
-    //	testRuntimeOnly("org.jetbrains.kotlinx", "kotlinx-coroutines-core", "1.6.4")
-    //	testRuntimeOnly("org.jetbrains.kotlinx", "kotlinx-coroutines-test", "1.6.4")
+    // testRuntimeOnly("org.jetbrains.kotlinx", "kotlinx-coroutines-core", "1.6.4")
+    // testRuntimeOnly("org.jetbrains.kotlinx", "kotlinx-coroutines-test", "1.6.4")
 }
 
 tasks {
