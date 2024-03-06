@@ -7,7 +7,8 @@ import org.springframework.stereotype.Component
 @Component
 class ArgumentResolver {
     private fun getTokenOrNull(): TokenDto? {
-        return SecurityContextHolder.getContext().authentication.principal as TokenDto?
+        val s = SecurityContextHolder.getContext().authentication.credentials as TokenDto?
+        return s
     }
 
     fun getUserId(): Long {
