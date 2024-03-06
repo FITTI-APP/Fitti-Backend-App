@@ -57,7 +57,7 @@ class DataInitConfiguration(
     @TransactionalEventListener(ApplicationStartingEvent::class)
     @EventListener(ApplicationStartingEvent::class)
     fun initExerciseKindData() {
-        val exercises = listOf(
+        val initExerciseKinds = listOf(
             "하체",
             "복근",
             "가슴",
@@ -68,11 +68,11 @@ class DataInitConfiguration(
         val exerciseKinds = exerciseKindRepository.findAll()
 
         val shouldDeleteExerciseKinds = exerciseKinds.filter { exerciseKind ->
-            !exercises.contains(exerciseKind.name)
+            !initExerciseKinds.contains(exerciseKind.name)
         }
         exerciseKindRepository.deleteAll(shouldDeleteExerciseKinds)
 
-        val shouldAddExercises = exercises.filter { exercise ->
+        val shouldAddExercises = initExerciseKinds.filter { exercise ->
             exerciseKinds.none { exerciseKind ->
                 exerciseKind.name == exercise
             }
@@ -84,5 +84,12 @@ class DataInitConfiguration(
                 )
             },
         )
+        initExerciseData()
+    }
+
+    @Bean
+    @Transactional
+    fun initExerciseData() {
+        // todo : init exercise data
     }
 }
