@@ -10,7 +10,7 @@ import fittibackendapp.exception.NotFoundExerciseSetRecordException
 import jakarta.transaction.Transactional
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
-import java.time.Duration
+import java.time.LocalTime
 
 @Service
 class ExerciseSetRecordService(
@@ -26,7 +26,7 @@ class ExerciseSetRecordService(
         weight: Double,
         reps: Int,
         distance: Double,
-        totalTime: Duration
+        totalTime: LocalTime
     ): ExerciseSetRecordDto {
         val exerciseExerciseRecord = exerciseExerciseRecordRepository.findByIdOrNull(exerciseExerciseRecordId)
             ?: throw NotFoundExerciseExerciseRecordException()
@@ -55,7 +55,7 @@ class ExerciseSetRecordService(
         weight: Double,
         reps: Int,
         distance: Double,
-        totalTime: Duration
+        totalTime: LocalTime
     ): ExerciseSetRecordDto {
         val exerciseExerciseRecord = exerciseExerciseRecordRepository.findByIdOrNull(exerciseExerciseRecordId)
             ?: throw NotFoundExerciseExerciseRecordException()

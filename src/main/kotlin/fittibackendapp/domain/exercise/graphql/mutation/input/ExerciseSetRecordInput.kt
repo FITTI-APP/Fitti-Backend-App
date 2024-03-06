@@ -1,6 +1,6 @@
 package fittibackendapp.domain.exercise.graphql.mutation.input
 
-import java.time.Duration
+import java.time.LocalTime
 
 data class ExerciseSetRecordInput(
     val exerciseSetRecordId: Long?,
@@ -9,5 +9,5 @@ data class ExerciseSetRecordInput(
     val weight: Double,
     val reps: Int,
     val distance: Double,
-    val totalTime: Duration
+    val totalTime: LocalTime
 )

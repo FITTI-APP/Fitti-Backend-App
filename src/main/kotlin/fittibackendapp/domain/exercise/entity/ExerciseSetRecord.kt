@@ -14,7 +14,7 @@ import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
 import org.hibernate.annotations.OnDelete
 import org.hibernate.annotations.OnDeleteAction
-import java.time.Duration
+import java.time.LocalTime
 
 @Entity
 @Table(name = "exercise_set_record")
@@ -32,7 +32,7 @@ class ExerciseSetRecord(
     @Column(name = "reps")
     var reps: Int,
     @Column(name = "total_time")
-    var totalTime: Duration,
+    var totalTime: LocalTime,
     @Size(max = 255)
     @NotNull
     @Column(name = "memo", nullable = false)
