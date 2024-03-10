@@ -4,10 +4,12 @@ import fittibackendapp.domain.diet.entity.DietMealRecord
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
+import org.springframework.stereotype.Repository
 import java.time.LocalDate
 
+@Repository
 interface DietMealRecordRepository: JpaRepository<DietMealRecord, Long> {
-    @Query("SELECT e FROM DietMealRecord e WHERE e.userId = :userId AND e.dateTime BETWEEN :fromDate AND :toDate")
+    @Query("SELECT e FROM DietMealRecord e WHERE e.user.id = :userId AND e.dateTime BETWEEN :fromDate AND :toDate")
     fun findDietMealRecordsBetweenDays(
         @Param("userId")
         userId: Long,
