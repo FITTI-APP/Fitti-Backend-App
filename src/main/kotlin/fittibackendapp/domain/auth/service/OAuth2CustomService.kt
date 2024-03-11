@@ -1,4 +1,4 @@
-package fittibackendapp.domain.auth.facade
+package fittibackendapp.domain.auth.service
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
@@ -24,8 +24,6 @@ import java.util.Date
 
 @Service
 class OAuth2CustomService(
-    // private val authenticationService: AuthenticationService,
-    // private val userService: UserService,
     private val userRepository: UserRepository,
     private val roleRepository: RoleRepository,
     private val loginTypeRepository: LoginTypeRepository,
@@ -36,20 +34,22 @@ class OAuth2CustomService(
         val delegateUserService = DefaultOAuth2UserService()
         val oAuth2User = delegateUserService.loadUser(userRequest)
 
-        val registrationId =
-            userRequest.clientRegistration.registrationId.uppercase() // "google", "kakao", "facebook"...
-        val userNameAttributeName =
-            userRequest.clientRegistration.providerDetails.userInfoEndpoint.userNameAttributeName
+        // val registrationId =
+        //      // "google", "kakao", "facebook"...
+        // val userNameAttributeName =
+        //     userRequest.clientRegistration.providerDetails.userInfoEndpoint.userNameAttributeName
 
-        val email = oAuth2User.attributes.get("email") as String
-        val name = oAuth2User.attributes.get("name") as String
+        // val picture = oAuth2User.attributes.get("picture") as String
+        val loginType = userRequest.clientRegistration.registrationId.uppercase()
+
+        val (email, name) = getUserData(oAuth2User.attributes, loginType)
 
         var user = userRepository.findByEmail(email)
 
 
         if (user == null) {
             // val picture = oAuth2User.attributes.get("picture") as String
-            val loginType = LoginType.GOOGLE // todo KAKAO, NAVER, FACEBOOK
+            // val loginType = LoginType.GOOGLE // todo KAKAO, NAVER, FACEBOOK
             saveOrUpdate(
                 email = email,
                 name = name,
@@ -87,6 +87,27 @@ class OAuth2CustomService(
         )
     }
 
+    fun getUserData(attribute: Map<String, Any>, loginType: String): Pair<String, String> {
+        var email = ""
+        var name = ""
+
+        if (loginType == LoginType.GOOGLE) {
+            email = attribute.get("email") as String
+            name = attribute.get("name") as String
+        }
+        else if (loginType == LoginType.NAVER) {
+            val response = attribute.get("response") as Map<String, Any>
+            email = response.get("email") as String
+            name = response.get("name") as String
+        }
+        else if (loginType == LoginType.FACEBOOK) {
+            email = attribute.get("email") as String
+            name = attribute.get("name") as String
+        }
+
+        return Pair(email, name)
+    }
+
     @Transactional
     fun saveOrUpdate(
         email: String,
@@ -97,7 +118,7 @@ class OAuth2CustomService(
         val loginType =
             loginTypeRepository.findByName(oauth2LoginType) ?: throw RuntimeException("EMAIL Login Type이  없습니다.")
 
-        val user = User(
+        User(
             email = email,
             password = "",
             name = name,

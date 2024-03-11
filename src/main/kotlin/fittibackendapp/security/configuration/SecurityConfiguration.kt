@@ -6,7 +6,7 @@ import fittibackendapp.common.security.bean.JwtFilter
 import fittibackendapp.common.security.component.CustomPasswordEncoder
 import fittibackendapp.common.security.component.JwtVerifier
 import fittibackendapp.common.security.type.AuthorizeRequestsApplier
-import fittibackendapp.domain.auth.facade.OAuth2CustomService
+import fittibackendapp.domain.auth.service.OAuth2CustomService
 import fittibackendapp.security.oauth2.MyAuthenticationSuccessHandler
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.context.annotation.AdviceMode
@@ -19,6 +19,7 @@ import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.web.AuthenticationEntryPoint
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.access.AccessDeniedHandler
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
 @Configuration
 @EnableWebSecurity
@@ -54,23 +55,29 @@ class SecurityConfiguration(
             it.disable()
         }.csrf {
             it.disable()
-        }.exceptionHandling {
-            it.authenticationEntryPoint(authenticationEntryPoint())
-            it.accessDeniedHandler(accessDeniedHandler())
-        }.sessionManagement {
-            it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        }.authorizeHttpRequests {
-            // 요청 경로 관련 설정. 현재 무엇이든지 받는다는 의미.
-            it.shouldFilterAllDispatcherTypes(false)
-        }.apply(authorizeRequestsApplier)
+        }.httpBasic {
+            it.disable()
+        }.formLogin {
+            it.disable()
+        }
+            .exceptionHandling {
+                it.authenticationEntryPoint(authenticationEntryPoint())
+                it.accessDeniedHandler(accessDeniedHandler())
+            }.sessionManagement {
+                it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            }.addFilterBefore(
+                jwtFilter(),
+                UsernamePasswordAuthenticationFilter::class.java,
+            )
+            .authorizeHttpRequests {
+                // 요청 경로 관련 설정. 현재 무엇이든지 받는다는 의미.
+                it.shouldFilterAllDispatcherTypes(false)
+            }.apply(authorizeRequestsApplier)
             .oauth2Login()
-            // .successHandler(myAuthenticationSuccessHandler)
+            .successHandler(myAuthenticationSuccessHandler)
             .userInfoEndpoint()
             .userService(oAuth2CustomService)
-        // .addFilterBefore(
-        //     jwtFilter(),
-        //     UsernamePasswordAuthenticationFilter::class.java,
-        // )
+            .and()
         return http.build()
     }
 

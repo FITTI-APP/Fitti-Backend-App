@@ -1,6 +1,6 @@
 package fittibackendapp.domain.auth.controller
 
-import fittibackendapp.domain.auth.facade.OAuth2CustomService
+import fittibackendapp.domain.auth.service.OAuth2CustomService
 import io.swagger.v3.oas.annotations.Operation
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
@@ -18,7 +18,7 @@ class GoogleAuthController(
     )
     @GetMapping("/authorization/google")
     fun googleLogin(
-        
+
     ) {
     }
 }
