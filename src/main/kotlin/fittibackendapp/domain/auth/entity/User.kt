@@ -27,14 +27,19 @@ class User(
     var email: String,
 
     @Size(max = 255)
-    @NotNull
-    @Column(name = "password", nullable = false)
-    var password: String,
+    @Column(name = "password")
+    var password: String? = null,
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "role", nullable = false)
-    var role: Role
+    var role: Role,
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "login_type_id", nullable = false)
+    var loginType: LoginType
+
 ): AuditLoggingBase() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

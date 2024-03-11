@@ -6,8 +6,11 @@ import fittibackendapp.common.exception.NotRegisteredEmailException
 import fittibackendapp.common.exception.UnCorrectedPasswordException
 import fittibackendapp.domain.auth.entity.Role
 import fittibackendapp.domain.auth.entity.User
+import fittibackendapp.domain.auth.repository.LoginTypeRepository
 import fittibackendapp.domain.auth.repository.RoleRepository
 import fittibackendapp.domain.auth.repository.UserRepository
+import fittibackendapp.dto.UserDto
+import fittibackendapp.dto.mapstruct.UserMapStruct
 import fittibackendapp.exception.DuplicatedEmailException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
@@ -22,28 +25,41 @@ class AuthenticationService(
     private val userRepository: UserRepository,
     private val roleRepository: RoleRepository,
     private val passwordEncoder: PasswordEncoder,
+    private val loginTypeRepository: LoginTypeRepository,
+    private val userMapStruct: UserMapStruct,
 ) {
+
     @Transactional
     fun register(
         email: String,
         password: String,
         name: String,
-    ): Long {
+        loginType: String,
+    ): UserDto {
         val role = roleRepository.findByName(Role.ROLE_USER) ?: throw RuntimeException("ROLE_USER가 없습니다.")
+        val loginType =
+            loginTypeRepository.findByName(loginType) ?: throw RuntimeException("EMAIL Login Type이  없습니다.")
+
         val existUser = userRepository.findByEmail(email)
         if (existUser != null) {
             throw DuplicatedEmailException()
         }
+
+        val encodedPassword = if (password.isEmpty())
+            passwordEncoder.encode(password)
+        else password
+
         val user = User(
             email = email,
-            password = passwordEncoder.encode(password),
+            password = encodedPassword,
             name = name,
             role = role,
+            loginType = loginType,
         ).apply {
             userRepository.save(this)
         }
 
-        return user.id!!
+        return userMapStruct.toDto(user)
     }
 
     @Transactional

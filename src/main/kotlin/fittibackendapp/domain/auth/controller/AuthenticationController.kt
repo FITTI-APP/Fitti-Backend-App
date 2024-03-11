@@ -4,6 +4,7 @@ import fittibackendapp.domain.auth.controller.request.LoginRequest
 import fittibackendapp.domain.auth.controller.request.RegisterRequest
 import fittibackendapp.domain.auth.controller.response.LoginResponse
 import fittibackendapp.domain.auth.controller.response.RegisterResponse
+import fittibackendapp.domain.auth.entity.LoginType
 import fittibackendapp.domain.auth.service.AuthenticationService
 import fittibackendapp.exception.InvalidateEmailException
 import fittibackendapp.exception.InvalidatePasswordException
@@ -73,7 +74,8 @@ class AuthenticationController(
             email = registerRequest.email,
             password = registerRequest.password,
             name = registerRequest.name,
-        )
+            loginType = LoginType.EMAIL,
+        ).id
         return RegisterResponse(userId = userId)
     }
 }

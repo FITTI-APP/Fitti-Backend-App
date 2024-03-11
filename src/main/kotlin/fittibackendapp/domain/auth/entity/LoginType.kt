@@ -1,6 +1,6 @@
 package fittibackendapp.domain.auth.entity
 
-import fittibackendapp.common.entitiybase.AuditLoggingEnumBase
+import fittibackendapp.common.entitiybase.AuditLoggingBase
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -11,11 +11,10 @@ import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
 
 @Entity
-@Table(name = "role")
-class Role(
-
-    @field:Size(max = 255)
-    @field:NotNull
+@Table(name = "login_type")
+class LoginType(
+    @Size(max = 255)
+    @NotNull
     @Column(name = "name", nullable = false)
     var name: String,
 
@@ -23,9 +22,12 @@ class Role(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     var id: Long = 0
-): AuditLoggingEnumBase() {
+): AuditLoggingBase() {
     companion object {
-        const val ROLE_USER = "ROLE_USER"
-        const val ROLE_ADMIN = "ROLE_ADMIN"
+        const val EMAIL = "EMAIL"
+        const val GOOGLE = "GOOGLE"
+        const val KAKAO = "KAKAO"
+        const val NAVER = "NAVER"
+        const val FACEBOOK = "FACEBOOK"
     }
 }

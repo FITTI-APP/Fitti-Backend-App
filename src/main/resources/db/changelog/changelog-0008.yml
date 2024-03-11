@@ -1,0 +1,61 @@
+databaseChangeLog:
+  - changeSet:
+      id: add login_type table for oauth2
+      author: TwoCastleNine
+      changes:
+        - createTable:
+            tableName: login_type
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_by
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_by
+                  type: bigint
+                  constraints:
+                    nullable: false
+        - addColumn:
+            tableName: user
+            columns:
+              - column:
+                  name: login_type_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+        - dropNotNullConstraint:
+            tableName: user
+            columnName: password
+            columnDataType: varchar(255)
+        - addForeignKeyConstraint:
+            baseTableName: user
+            baseColumnNames: login_type_id
+            constraintName: fk_user_login_type_id
+            referencedTableName: login_type
+            referencedColumnNames: id
+
+

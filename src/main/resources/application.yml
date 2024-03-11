@@ -37,6 +37,9 @@ spring:
   mvc:
     log-request-details: true
     log-resolved-exception: true
+  profiles:
+    include:
+      - oauth2
 
   error:
     include-message: always

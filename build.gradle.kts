@@ -107,7 +107,7 @@ dependencies {
     implementation("jakarta.annotation", "jakarta.annotation-api")
     implementation("com.tailrocks.graphql", "graphql-datetime-spring-boot-starter", "6.0.0")
     implementation("com.graphql-java:graphql-java-extended-scalars:20.0")
-    // implementation("com.graphql-java-generator:graphql-java-common-runtime:1.18.6") todo
+    // implementation("com.graphql-java-generator:graphql-java-common-runtime:1.18.6")
     implementation("org.mapstruct", "mapstruct", mapStructVersion)
     kapt("org.mapstruct", "mapstruct-processor", mapStructVersion)
     // implementation("org.modelmapper", "modelmapper", "3.0.0")
