@@ -31,6 +31,5 @@ jobs:
           coverage-counter-type: LINE
 
       - name: Make check fail when coverage conditions are not met
-        run: |
-          coverage=${{ steps.kover.outputs.coverage-overall }}
-          if [ coverage \< 100 ]; then exit 1; else return 0; fi
+        shell: bash
+        run: if [ ${{ steps.kover.outputs.coverage-overall }} \< 100 ]; then exit 1; fi
