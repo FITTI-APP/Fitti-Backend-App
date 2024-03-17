@@ -26,7 +26,6 @@ jobs:
             ${{ github.workspace }}/build/reports/kover/report.xml
           token: ${{ secrets.PAT_FITTI }}
           title: Code Coverage
-          update-comment: true
           min-coverage-overall: 100
           coverage-counter-type: LINE
 
