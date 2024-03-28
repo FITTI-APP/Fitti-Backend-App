@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component
 @Component
 class FittiJwtVerifier(
     private val tokenAlgorithm: Algorithm,
-) : JwtVerifier {
+): JwtVerifier {
     override val tokenVerifier: JWTVerifier = JWT
         .require(tokenAlgorithm)
         .withClaimPresence("name")
@@ -35,7 +35,7 @@ class FittiJwtVerifier(
                 "fitti"
                 -> TokenDto(
                     name = "fitti",
-                    userId = 99997,
+                    userId = 1,
                     role = 2,
                 )
 

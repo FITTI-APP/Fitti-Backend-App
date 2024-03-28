@@ -5,5 +5,5 @@ input ExerciseSetRecordInput{
     weight: Float!,
     reps: Int!,
     distance: Float!,
-    totalTime: Duration!
+    totalTime: LocalTime!
 }
